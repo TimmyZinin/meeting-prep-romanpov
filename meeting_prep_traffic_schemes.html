@@ -1,0 +1,1834 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Схемы видео-продакшна для трафика — Инфографика</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FDF6EC;
+  --bg-card: #FFFAF2;
+  --bg-dark: #2D2520;
+  --accent-warm: #E8734A;
+  --accent-gold: #D4A843;
+  --accent-teal: #2A9D8F;
+  --accent-coral: #E76F51;
+  --accent-rose: #C4556E;
+  --accent-sage: #6B8F71;
+  --text-dark: #3D3229;
+  --text-mid: #6B5D52;
+  --text-light: #A8957F;
+  --border: rgba(61,50,41,0.08);
+  --shadow: 0 4px 24px rgba(45,37,32,0.06);
+  --shadow-lg: 0 12px 48px rgba(45,37,32,0.1);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--bg);
+  color: var(--text-dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ===== NAV ===== */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(253,246,236,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 52px;
+}
+
+.nav-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-mid);
+  text-decoration: none;
+  padding: 8px 18px;
+  border-radius: 100px;
+  transition: all .25s ease;
+  letter-spacing: 0.2px;
+}
+
+.nav-link:hover {
+  color: var(--accent-warm);
+  background: rgba(232,115,74,0.08);
+}
+
+.nav-link.active {
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent-warm), var(--accent-coral));
+  box-shadow: 0 2px 12px rgba(232,115,74,0.3);
+}
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 24px;
+  overflow: hidden;
+  background: linear-gradient(160deg, #FDF6EC 0%, #F7E8D4 30%, #FDEBD0 60%, #FDF6EC 100%);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,115,74,0.12) 0%, transparent 70%);
+  animation: float1 18s ease-in-out infinite;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -150px; left: -150px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(42,157,143,0.1) 0%, transparent 70%);
+  animation: float2 22s ease-in-out infinite;
+}
+
+@keyframes float1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-40px,30px)} }
+@keyframes float2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(30px,-25px)} }
+
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 900px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border-radius: 100px;
+  background: rgba(232,115,74,0.1);
+  color: var(--accent-warm);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  animation: fadeDown .8s ease-out;
+}
+
+.hero-badge::before {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent-warm);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.3)} }
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(38px, 6vw, 76px);
+  font-weight: 900;
+  line-height: 1.05;
+  color: var(--text-dark);
+  margin-bottom: 24px;
+  animation: fadeDown 1s ease-out .1s both;
+}
+
+.hero h1 span {
+  background: linear-gradient(135deg, var(--accent-warm), var(--accent-coral));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 20px;
+  color: var(--text-mid);
+  max-width: 650px;
+  margin: 0 auto 48px;
+  font-weight: 300;
+  animation: fadeDown 1s ease-out .2s both;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+  animation: fadeDown 1s ease-out .35s both;
+}
+
+.hero-stat {
+  text-align: center;
+}
+
+.hero-stat .num {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px;
+  font-weight: 900;
+  color: var(--accent-warm);
+}
+
+.hero-stat .label {
+  font-size: 13px;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== LAYOUT ===== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+section {
+  padding: 80px 0;
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+  margin-bottom: 16px;
+}
+
+.section-label::before {
+  content: '';
+  width: 32px; height: 2px;
+  background: var(--accent-warm);
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-dark);
+}
+
+.section-desc {
+  font-size: 17px;
+  color: var(--text-mid);
+  max-width: 680px;
+  margin-bottom: 48px;
+  font-weight: 300;
+}
+
+/* ===== SCHEME CARDS ===== */
+.scheme-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform .3s ease;
+}
+
+.scheme-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.scheme-header {
+  padding: 32px 32px 24px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.scheme-header .scheme-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 8px;
+}
+
+.scheme-header .scheme-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.scheme-header .scheme-tagline {
+  font-size: 15px;
+  color: var(--text-mid);
+  font-weight: 300;
+}
+
+.scheme-header .scheme-price-badge {
+  position: absolute;
+  top: 28px; right: 32px;
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--accent-warm);
+}
+
+.scheme-header .scheme-price-badge small {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-light);
+}
+
+.scheme-body {
+  padding: 28px 32px;
+}
+
+.scheme-body p {
+  font-size: 15px;
+  color: var(--text-mid);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.scheme-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* ===== WARNING BOX ===== */
+.warning-box {
+  background: rgba(232,115,74,0.06);
+  border-left: 4px solid var(--accent-coral);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 16px 20px;
+  margin: 16px 0;
+  font-size: 14px;
+  color: var(--text-dark);
+}
+
+.warning-box.danger {
+  background: rgba(196,85,110,0.08);
+  border-left-color: var(--accent-rose);
+}
+
+.warning-box.success {
+  background: rgba(42,157,143,0.06);
+  border-left-color: var(--accent-teal);
+}
+
+.warning-box strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* ===== BENCHMARK TABLE ===== */
+.benchmark-grid {
+  overflow-x: auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+}
+
+.benchmark-table {
+  width: 100%;
+  min-width: 800px;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.benchmark-table thead {
+  position: sticky;
+  top: 52px;
+  z-index: 3;
+}
+
+.benchmark-table th {
+  background: var(--bg-dark);
+  color: #F5EDE0;
+  padding: 14px 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.benchmark-table th:first-child {
+  border-radius: var(--radius) 0 0 0;
+}
+
+.benchmark-table th:last-child {
+  border-radius: 0 var(--radius) 0 0;
+}
+
+.benchmark-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-card);
+  vertical-align: middle;
+}
+
+.benchmark-table tr:hover td {
+  background: #FFF5E8;
+}
+
+.benchmark-table tr.recommended td {
+  background: rgba(232,115,74,0.06);
+  border-left: 3px solid var(--accent-warm);
+}
+
+.benchmark-table tr.recommended td:first-child {
+  font-weight: 700;
+}
+
+.model-name {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.model-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.badge-best { background: rgba(232,115,74,0.15); color: var(--accent-warm); }
+.badge-fast { background: rgba(42,157,143,0.15); color: var(--accent-teal); }
+.badge-cheap { background: rgba(212,168,67,0.15); color: var(--accent-gold); }
+.badge-new { background: rgba(196,85,110,0.15); color: var(--accent-rose); }
+.badge-danger { background: rgba(196,85,110,0.15); color: var(--accent-rose); }
+
+.quality-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.quality-bar .bar-bg {
+  width: 80px;
+  height: 8px;
+  background: rgba(61,50,41,0.08);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.quality-bar .bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1s ease-out;
+}
+
+.quality-bar .bar-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 32px;
+}
+
+.cost-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-warm);
+}
+
+.vram-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgba(107,143,113,0.12);
+  color: var(--accent-sage);
+  white-space: nowrap;
+}
+
+/* ===== PIPELINE SECTION ===== */
+.pipeline-section {
+  background: linear-gradient(180deg, var(--bg) 0%, #F5EDE0 100%);
+}
+
+.pipeline-flow {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  overflow-x: auto;
+  padding: 20px 0;
+  position: relative;
+}
+
+.pipeline-step {
+  flex: 1;
+  min-width: 160px;
+  position: relative;
+  text-align: center;
+  padding: 0 6px;
+}
+
+.pipeline-step .step-icon {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  font-size: 28px;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.pipeline-step:hover .step-icon {
+  transform: scale(1.1) translateY(-4px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+}
+
+.pipeline-step:nth-child(1) .step-icon { background: linear-gradient(135deg, #E8734A, #D4603A); color: #fff; }
+.pipeline-step:nth-child(2) .step-icon { background: linear-gradient(135deg, #D4A843, #C49A38); color: #fff; }
+.pipeline-step:nth-child(3) .step-icon { background: linear-gradient(135deg, #2A9D8F, #238B7E); color: #fff; }
+.pipeline-step:nth-child(4) .step-icon { background: linear-gradient(135deg, #C4556E, #B04A60); color: #fff; }
+.pipeline-step:nth-child(5) .step-icon { background: linear-gradient(135deg, #6B8F71, #5C7D63); color: #fff; }
+.pipeline-step:nth-child(6) .step-icon { background: linear-gradient(135deg, #8B6BB5, #7A5CA0); color: #fff; }
+.pipeline-step:nth-child(7) .step-icon { background: linear-gradient(135deg, var(--accent-warm), var(--accent-gold)); color: #fff; }
+
+.pipeline-step .step-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-light);
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
+
+.pipeline-step .step-name {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text-dark);
+  margin-bottom: 4px;
+}
+
+.pipeline-step .step-tool {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--accent-teal);
+  margin-bottom: 6px;
+}
+
+.pipeline-step .step-time {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.pipeline-step .step-cost {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-warm);
+  margin-top: 4px;
+}
+
+.pipeline-connector {
+  position: absolute;
+  top: 36px;
+  left: calc(50% + 36px);
+  width: calc(100% - 72px);
+  height: 2px;
+  z-index: 1;
+}
+
+.pipeline-connector::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: repeating-linear-gradient(90deg, var(--accent-warm) 0, var(--accent-warm) 6px, transparent 6px, transparent 12px);
+  opacity: .3;
+}
+
+.pipeline-connector::after {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: -10px;
+  color: var(--accent-warm);
+  font-size: 18px;
+  opacity: .5;
+  content: '\2192';
+}
+
+.pipeline-step:last-child .pipeline-connector { display: none; }
+
+/* ===== COST SCENARIOS ===== */
+.cost-section {
+  background: var(--bg);
+}
+
+.cost-scenarios {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.cost-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform .3s ease;
+}
+
+.cost-card:hover {
+  transform: translateY(-4px);
+}
+
+.cost-card.featured {
+  border: 2px solid var(--accent-warm);
+  box-shadow: var(--shadow-lg);
+}
+
+.cost-card-header {
+  padding: 28px 24px 20px;
+  position: relative;
+}
+
+.cost-card.featured .cost-card-header {
+  background: linear-gradient(135deg, rgba(232,115,74,0.08), rgba(212,168,67,0.06));
+}
+
+.cost-card-header .scenario-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 6px;
+}
+
+.cost-card-header .scenario-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.cost-card-header .scenario-desc {
+  font-size: 13px;
+  color: var(--text-mid);
+}
+
+.cost-card-header .scenario-price {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--accent-warm);
+}
+
+.cost-card-header .scenario-price small {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-light);
+}
+
+.cost-card-body {
+  padding: 0 24px 24px;
+}
+
+.cost-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.cost-row:last-child {
+  border-bottom: none;
+  font-weight: 700;
+  color: var(--accent-warm);
+}
+
+.cost-row .cost-item {
+  color: var(--text-mid);
+}
+
+.cost-row .cost-tool {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--accent-teal);
+}
+
+.cost-row .cost-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+}
+
+/* ===== ALTERNATIVE PLATFORMS ===== */
+.alt-section {
+  background: linear-gradient(180deg, #F5EDE0 0%, var(--bg) 100%);
+}
+
+.star-rating {
+  color: var(--accent-gold);
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+/* ===== TTS CARDS ===== */
+.tts-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.tts-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  transition: transform .3s ease, box-shadow .3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.tts-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.tts-card.pick::before {
+  content: 'BEST VALUE';
+  position: absolute;
+  top: 16px; right: -32px;
+  background: var(--accent-warm);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 4px 40px;
+  transform: rotate(45deg);
+}
+
+.tts-card .tts-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.tts-card .tts-origin {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+.tts-card .tts-price {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--accent-warm);
+  margin-bottom: 4px;
+}
+
+.tts-card .tts-price-note {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+.tts-card .tts-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tts-card .tts-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+.tts-card .tts-meta-row .label {
+  color: var(--text-light);
+}
+
+.tts-card .tts-meta-row .value {
+  font-weight: 600;
+}
+
+/* ===== PAYMENT SECTION ===== */
+.payment-section {
+  background: var(--bg);
+}
+
+.payment-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.payment-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: transform .3s ease;
+}
+
+.payment-card:hover { transform: translateY(-3px); }
+
+.payment-card .pay-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.payment-card .pay-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.payment-card .pay-desc {
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.5;
+}
+
+/* ===== MCP LIST ===== */
+.mcp-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.mcp-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  transition: background .2s;
+}
+
+.mcp-item:hover { background: #FFF5E8; }
+
+.mcp-item .mcp-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  background: rgba(42,157,143,0.1);
+}
+
+.mcp-item .mcp-name {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--accent-teal);
+  margin-bottom: 4px;
+}
+
+.mcp-item .mcp-desc {
+  font-size: 13px;
+  color: var(--text-mid);
+}
+
+.mcp-item .mcp-stars {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+
+/* ===== INSIGHTS ===== */
+.insights-section {
+  background: var(--bg);
+}
+
+.insight-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.insight-card {
+  position: relative;
+  padding: 32px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform .3s;
+}
+
+.insight-card:hover { transform: translateY(-4px); }
+
+.insight-card:nth-child(1) { background: linear-gradient(135deg, rgba(232,115,74,0.08), rgba(232,115,74,0.02)); border: 1px solid rgba(232,115,74,0.15); }
+.insight-card:nth-child(2) { background: linear-gradient(135deg, rgba(42,157,143,0.08), rgba(42,157,143,0.02)); border: 1px solid rgba(42,157,143,0.15); }
+.insight-card:nth-child(3) { background: linear-gradient(135deg, rgba(212,168,67,0.08), rgba(212,168,67,0.02)); border: 1px solid rgba(212,168,67,0.15); }
+
+.insight-card .insight-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 64px;
+  font-weight: 900;
+  position: absolute;
+  top: 12px; right: 20px;
+  opacity: .07;
+  color: var(--text-dark);
+}
+
+.insight-card .insight-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.insight-card .insight-text {
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.6;
+}
+
+/* ===== MATRIX SECTION ===== */
+.matrix-section {
+  background: #F5EDE0;
+}
+
+.matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+.matrix-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform .3s ease;
+}
+
+.matrix-card:hover { transform: translateY(-3px); }
+
+.matrix-card-rank {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.matrix-rank-num {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 900;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.matrix-card:nth-child(1) .matrix-rank-num { background: linear-gradient(135deg, var(--accent-warm), var(--accent-coral)); }
+.matrix-card:nth-child(2) .matrix-rank-num { background: linear-gradient(135deg, var(--accent-gold), #C49A38); }
+.matrix-card:nth-child(3) .matrix-rank-num { background: linear-gradient(135deg, var(--accent-teal), #1E8C7E); }
+.matrix-card:nth-child(4) .matrix-rank-num { background: linear-gradient(135deg, var(--accent-rose), #A8465C); }
+.matrix-card:nth-child(5) .matrix-rank-num { background: linear-gradient(135deg, var(--accent-sage), #567A5C); }
+.matrix-card:nth-child(6) .matrix-rank-num { background: linear-gradient(135deg, #8B6BB5, #7A5CA0); }
+
+.matrix-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.matrix-card-subtitle {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+
+.matrix-card-body {
+  padding: 20px 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.matrix-metric {
+  text-align: center;
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  background: rgba(61,50,41,0.03);
+}
+
+.matrix-metric .val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--accent-warm);
+}
+
+.matrix-metric .lbl {
+  font-size: 10px;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin-top: 2px;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  padding: 48px 24px;
+  font-size: 12px;
+  color: var(--text-light);
+  border-top: 1px solid var(--border);
+}
+
+/* ===== ANIMATION ON SCROLL ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s ease-out, transform .7s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== DARK SECTION ===== */
+.dark-section {
+  background: var(--bg-dark);
+  color: #F5EDE0;
+}
+
+.dark-section .section-label {
+  color: var(--accent-gold);
+}
+
+.dark-section .section-label::before {
+  background: var(--accent-gold);
+}
+
+.dark-section .section-title {
+  color: #F5EDE0;
+}
+
+.dark-section .section-desc {
+  color: rgba(245,237,224,0.6);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .hero-stats { gap: 24px; }
+  .pipeline-flow { flex-direction: column; align-items: center; }
+  .pipeline-connector { display: none !important; }
+  .pipeline-step { min-width: unset; width: 100%; max-width: 260px; margin-bottom: 16px; }
+  .cost-scenarios { grid-template-columns: 1fr; }
+  .matrix-grid { grid-template-columns: 1fr; }
+  .cost-card-header .scenario-price { position: static; margin-top: 12px; }
+  .scheme-header .scheme-price-badge { position: static; margin-top: 12px; }
+  .nav-inner { gap: 4px; }
+  .nav-link { font-size: 11px; padding: 6px 10px; }
+}
+
+@media (max-width: 480px) {
+  section { padding: 48px 0; }
+  .payment-cards { grid-template-columns: 1fr; }
+  .mcp-list { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="meeting_prep_romanpov.html" class="nav-link">Подготовка к встрече</a>
+    <a href="meeting_prep_video_factory.html" class="nav-link">AI Video Factory</a>
+    <a href="meeting_prep_traffic_schemes.html" class="nav-link active">Схемы трафика</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Февраль 2026 &bull; Исследование</div>
+    <h1>Схемы видео-<br>продакшна <span>для трафика</span></h1>
+    <p class="hero-sub">Полный разбор 4 схем AI-видео для 5 виртуальных блогеров. Бюджет $50&ndash;150/мес: от open-source до enterprise.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="num">4</div>
+        <div class="label">схемы<br>продакшна</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">6+</div>
+        <div class="label">платформ<br>сравнено</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">$22</div>
+        <div class="label">минимум<br>в месяц</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">$160</div>
+        <div class="label">максимум<br>в месяц</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== SCHEME 1: GOOGLE AI ULTRA ===== -->
+<section style="background: linear-gradient(180deg, var(--bg) 0%, #F5EDE0 100%);">
+  <div class="container">
+    <div class="section-label">Схема 01</div>
+    <h2 class="section-title">Google AI Ultra</h2>
+    <p class="section-desc">2500 видео за $125, но кредиты общие. Veo 3.1 Fast по 10 кредитов/генерацию на Ultra-плане.</p>
+
+    <div class="scheme-card fade-in" style="margin-bottom: 32px;">
+      <div class="scheme-header">
+        <div class="scheme-num">Google AI Ultra</div>
+        <div class="scheme-title">2500 клипов Veo 3.1 / мес</div>
+        <div class="scheme-tagline">Промо $125/мес (3 мес), потом $250/мес. Семейный шеринг до 6 аккаунтов.</div>
+        <div class="scheme-price-badge">$125<small>/мес</small></div>
+      </div>
+      <div class="scheme-body">
+        <div class="benchmark-grid" style="margin-bottom: 20px;">
+          <table class="benchmark-table">
+            <thead>
+              <tr>
+                <th>План</th>
+                <th>Цена/мес</th>
+                <th>AI-кредиты</th>
+                <th>Видео через Veo 3.1 Fast</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="model-name">AI Plus</span></td>
+                <td><span class="cost-tag">$7.99</span></td>
+                <td>200</td>
+                <td>~20</td>
+              </tr>
+              <tr>
+                <td><span class="model-name">AI Pro</span></td>
+                <td><span class="cost-tag">$19.99</span></td>
+                <td>1,000</td>
+                <td>~50&ndash;100</td>
+              </tr>
+              <tr class="recommended">
+                <td><span class="model-name">AI Ultra</span> <span class="model-badge badge-best">BEST</span></td>
+                <td><span class="cost-tag">$249.99</span></td>
+                <td>25,000</td>
+                <td>~2,500</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="warning-box success">
+          <strong>Семейный шеринг</strong>
+          До 6 аккаунтов (менеджер + 5 членов). Однако кредиты НЕ умножаются, а делятся: все 25,000 кредитов распределяются между 6 пользователями из общего пула. Для 5 блогеров = ~4167 генераций на аватар при одном Ultra-аккаунте.
+        </div>
+
+        <div class="warning-box danger">
+          <strong>Гео-ограничения для России</strong>
+          AI-функции Google заблокированы в России из-за санкций. VPN недостаточен &mdash; Google использует мультифакторную проверку (IP + регион аккаунта + цифровой отпечаток). Нужен US/EU-аккаунт + резидентные прокси.
+        </div>
+
+        <div class="warning-box">
+          <strong>Veo для talking head</strong>
+          Veo 3.1 генерирует персонажей с хорошим lip-sync, но НЕ умеет клонировать конкретного человека. Подходит как генератор B-roll и креативных сцен, но не как основной инструмент talking head.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SCHEME 2: PLATI MARKET ===== -->
+<section style="background: var(--bg);">
+  <div class="container">
+    <div class="section-label">Схема 02</div>
+    <h2 class="section-title">Plati Market</h2>
+    <p class="section-desc">$5 за подписку, но $5 за риск потерять все. Вьетнамские Google AI-подписки по радикально сниженным ценам.</p>
+
+    <div class="scheme-card fade-in" style="margin-bottom: 32px;">
+      <div class="scheme-header">
+        <div class="scheme-num">Plati Market &mdash; серый рынок</div>
+        <div class="scheme-title">Ultra за $3.75&ndash;$6.60</div>
+        <div class="scheme-tagline">GWE-аккаунты (Google Workspace Enterprise) дают 45,000 кредитов &mdash; ~4500 видео Veo 3.1 Fast/мес.</div>
+        <div class="scheme-price-badge">$5<small>/мес</small></div>
+      </div>
+      <div class="scheme-body">
+        <div class="benchmark-grid" style="margin-bottom: 20px;">
+          <table class="benchmark-table">
+            <thead>
+              <tr>
+                <th>Товар</th>
+                <th>Цена на Plati</th>
+                <th>Официальная цена</th>
+                <th>Риск</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="model-name">Google AI Ultra (1 мес)</span></td>
+                <td><span class="cost-tag">$3.75&ndash;$6.60</span></td>
+                <td>$249.99</td>
+                <td><span class="model-badge badge-danger">ВЫСОКИЙ</span></td>
+              </tr>
+              <tr>
+                <td><span class="model-name">Google AI Pro (1&ndash;6 мес)</span></td>
+                <td><span class="cost-tag">$0.27&ndash;$16.93</span></td>
+                <td>$19.99/мес</td>
+                <td><span class="model-badge badge-danger">ВЫСОКИЙ</span></td>
+              </tr>
+              <tr>
+                <td><span class="model-name">GWE-аккаунт (45K кредитов)</span></td>
+                <td><span class="cost-tag">$5&ndash;$15</span></td>
+                <td>Enterprise</td>
+                <td><span class="model-badge badge-danger">КРИТИЧЕСКИЙ</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="warning-box danger">
+          <strong>Критические риски</strong>
+          Продавец сохраняет recovery-данные и может вернуть аккаунт. GWE-аккаунты маркируются как &laquo;non-renewable, 1-month use only&raquo;. Google периодически проводит аудит и блокирует аккаунты с региональными аномалиями. Потеря данных &mdash; вопрос времени, не вероятности. Рефанды с комиссией 10&ndash;20%.
+        </div>
+
+        <div class="warning-box">
+          <strong>Вердикт</strong>
+          Для тестирования возможностей Veo за $5 &mdash; допустимо. Для стабильного продакшна 5 блогеров &mdash; неприемлемый риск. Использовать только для одноразовых экспериментов с расходными аккаунтами, никогда не хранить важный контент.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SCHEME 3: SORA ===== -->
+<section style="background: linear-gradient(180deg, #F5EDE0 0%, var(--bg) 100%);">
+  <div class="container">
+    <div class="section-label">Схема 03</div>
+    <h2 class="section-title">OpenAI Sora</h2>
+    <p class="section-desc">Кинематографично, но не для talking head. $200/мес через ChatGPT Pro. Sora 2 с сентября 2025.</p>
+
+    <div class="scheme-card fade-in" style="margin-bottom: 32px;">
+      <div class="scheme-header">
+        <div class="scheme-num">Sora 2 &mdash; ChatGPT Pro</div>
+        <div class="scheme-title">Кино-уровень визуала</div>
+        <div class="scheme-tagline">100 приоритетных генераций/день + безлимитный Relaxed Mode. Бесплатный доступ закрыт с 10 января 2026.</div>
+        <div class="scheme-price-badge">$200<small>/мес</small></div>
+      </div>
+      <div class="scheme-body">
+        <div class="benchmark-grid" style="margin-bottom: 20px;">
+          <table class="benchmark-table">
+            <thead>
+              <tr>
+                <th>Параметр</th>
+                <th>ChatGPT Plus ($20/мес)</th>
+                <th>ChatGPT Pro ($200/мес)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="model-name">Кредиты</span></td>
+                <td>1,000/мес</td>
+                <td>10,000/мес + безлимит Relaxed</td>
+              </tr>
+              <tr>
+                <td><span class="model-name">Разрешение</span></td>
+                <td>720p</td>
+                <td>1080p</td>
+              </tr>
+              <tr>
+                <td><span class="model-name">Макс. длина</span></td>
+                <td>10&ndash;20 сек</td>
+                <td>20&ndash;25 сек</td>
+              </tr>
+              <tr>
+                <td><span class="model-name">Дневной лимит</span></td>
+                <td>~30 кредитов</td>
+                <td>100 приоритетных генераций</td>
+              </tr>
+              <tr>
+                <td><span class="model-name">Водяной знак</span></td>
+                <td>Да</td>
+                <td>Нет</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="warning-box">
+          <strong>Ограничения для talking head</strong>
+          Sora не поддерживает загрузку reference-изображений с людьми (safety policy). Единственный способ создать аватар &mdash; Cameo (требует live-видео с проверкой лица). Character feature работает только для объектов и животных, не людей.
+        </div>
+
+        <div class="warning-box success">
+          <strong>Где Sora сильна</strong>
+          Кинематографический визуал и эмоции &mdash; близко к &laquo;Black Mirror level&raquo;. Для B-roll и креативных сцен отлично. При бюджете $50&ndash;150/мес Sora Pro за $200 выходит за рамки, но ChatGPT Plus за $20/мес даёт ~30 генераций/день для дополнительного контента.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SCHEME 4: DAVINCI RESOLVE + MCP ===== -->
+<section style="background: var(--bg);">
+  <div class="container">
+    <div class="section-label">Схема 04</div>
+    <h2 class="section-title">DaVinci Resolve + MCP</h2>
+    <p class="section-desc">Реальная автоматизация монтажа через Python API и MCP-серверы. Studio $295 единоразово.</p>
+
+    <div class="scheme-card fade-in" style="margin-bottom: 32px;">
+      <div class="scheme-header">
+        <div class="scheme-num">DaVinci Resolve Studio + MCP</div>
+        <div class="scheme-title">Автоматический монтаж через AI</div>
+        <div class="scheme-tagline">LLM (Claude/GPT) &rarr; MCP-сервер &rarr; Python API DaVinci Resolve &rarr; операции. Resolve поддерживает headless-режим (-nogui).</div>
+        <div class="scheme-price-badge">$295<small>разово</small></div>
+      </div>
+      <div class="scheme-body">
+        <p><strong>MCP-серверы на GitHub:</strong></p>
+        <div class="mcp-list">
+          <div class="mcp-item">
+            <div class="mcp-icon">1</div>
+            <div>
+              <div class="mcp-name">apvlv/davinci-resolve-mcp</div>
+              <div class="mcp-desc">Управление проектами, таймлайнами, медиа, произвольный Python-код внутри Resolve</div>
+              <div class="mcp-stars">37 звёзд на GitHub</div>
+            </div>
+          </div>
+          <div class="mcp-item">
+            <div class="mcp-icon">2</div>
+            <div>
+              <div class="mcp-name">samuelgursky/davinci-resolve-mcp</div>
+              <div class="mcp-desc">Расширенный набор функций с установщиками для Cursor и Claude Desktop</div>
+              <div class="mcp-stars">Активная разработка</div>
+            </div>
+          </div>
+          <div class="mcp-item">
+            <div class="mcp-icon">3</div>
+            <div>
+              <div class="mcp-name">tooflex/davinci-resolve-mcp</div>
+              <div class="mcp-desc">Управление галереей, треками, аудио, воспроизведением</div>
+              <div class="mcp-stars">Дополнительные функции</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="warning-box success">
+          <strong>Что можно автоматизировать</strong>
+          Создание проектов, импорт медиа в бины, создание таймлайнов, добавление клипов, применение LUT/грейдов, настройка и запуск рендера, управление маркерами, создание Fusion-композиций.
+        </div>
+
+        <div class="warning-box danger">
+          <strong>Критическое ограничение</strong>
+          Клипы можно только добавлять в конец Track 1, нет произвольного позиционирования, нет точного тримминга и сплита. ~60% результатов можно брать в работу &mdash; автоматизация покрывает рутину, но финальная доводка требует ручной работы.
+        </div>
+
+        <div class="warning-box">
+          <strong>Требование</strong>
+          Для внешнего скриптинга требуется Studio ($295 единоразово). Бесплатная версия позволяет скриптить только из Fusion Console. С версии 19.1 убран UIManager из бесплатной версии.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ALTERNATIVE PLATFORMS ===== -->
+<section class="alt-section">
+  <div class="container">
+    <div class="section-label">Альтернативы</div>
+    <h2 class="section-title">Альтернативные платформы</h2>
+    <p class="section-desc">Цены и реальные возможности 7 платформ для видео-продакшна. От $5.99 до $180/мес.</p>
+
+    <div class="benchmark-grid fade-in">
+      <table class="benchmark-table">
+        <thead>
+          <tr>
+            <th>Платформа</th>
+            <th>Цена/мес</th>
+            <th>Видео/мес</th>
+            <th>Talking Head</th>
+            <th>Custom аватар</th>
+            <th>Оптимально для</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="recommended">
+            <td><span class="model-name">HeyGen</span> <span class="model-badge badge-best">BEST</span></td>
+            <td><span class="cost-tag">$24&ndash;149</span></td>
+            <td>Безлимит (Avatar III)</td>
+            <td><span class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span></td>
+            <td>Да ($29/слот)</td>
+            <td>Масштабный видео-продакшн</td>
+          </tr>
+          <tr>
+            <td><span class="model-name">D-ID</span></td>
+            <td><span class="cost-tag">$5.99&ndash;300</span></td>
+            <td>10&ndash;65 мин</td>
+            <td><span class="star-rating">&#9733;&#9733;&#9733;&#9734;&#9734;</span></td>
+            <td>Ограничено</td>
+            <td>Интерактивные AI-агенты</td>
+          </tr>
+          <tr>
+            <td><span class="model-name">Synthesia</span></td>
+            <td><span class="cost-tag">$18&ndash;89</span></td>
+            <td>По кредитам</td>
+            <td><span class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span></td>
+            <td>Да ($1000/год)</td>
+            <td>Корпоративное обучение</td>
+          </tr>
+          <tr>
+            <td><span class="model-name">Creatify</span></td>
+            <td><span class="cost-tag">$19&ndash;49</span></td>
+            <td>20&ndash;40 видео</td>
+            <td><span class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9734;</span></td>
+            <td>Да (Pro+)</td>
+            <td>Рекламные креативы</td>
+          </tr>
+          <tr>
+            <td><span class="model-name">Runway Gen-4</span> <span class="model-badge badge-new">CINEMA</span></td>
+            <td><span class="cost-tag">$12&ndash;95</span></td>
+            <td>~52с&ndash;безлимит</td>
+            <td><span class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span></td>
+            <td>Нет библиотеки</td>
+            <td>Кинематографический контент</td>
+          </tr>
+          <tr>
+            <td><span class="model-name">Kling AI</span> <span class="model-badge badge-cheap">BUDGET</span></td>
+            <td><span class="cost-tag">$6.99&ndash;180</span></td>
+            <td>По кредитам</td>
+            <td><span class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9734;</span></td>
+            <td>Нет</td>
+            <td>Бюджетная видеогенерация</td>
+          </tr>
+          <tr>
+            <td><span class="model-name">Local GPU</span> <span class="model-badge badge-fast">DIY</span></td>
+            <td><span class="cost-tag">$10&ndash;30</span></td>
+            <td>Безлимит</td>
+            <td><span class="star-rating">&#9733;&#9733;&#9733;&#9734;&#9734;&ndash;&#9733;&#9733;&#9733;&#9733;&#9734;</span></td>
+            <td>Полный контроль</td>
+            <td>Технические команды</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div class="warning-box success" style="margin: 0;">
+        <strong>HeyGen &mdash; лидер для talking head</strong>
+        Creator ($24/мес годовой) &mdash; безлимитные видео с Avatar III и 200 Premium Credits для Avatar IV. Avatar IV: микро-экспрессии, фотореалистичность, 175+ языков с lip-sync. Для 5 блогеров: Business ($119/мес) + доп. слоты $29/шт.
+      </div>
+      <div class="warning-box" style="margin: 0;">
+        <strong>Локальные GPU &mdash; самый дешёвый путь</strong>
+        Стек: LivePortrait + MuseTalk + GPT-SoVITS. RTX 4090 на Vast.ai: $0.20&ndash;0.40/час. При ~4 часах compute/мес = $1.20&ndash;$2.76 за GPU + $2&ndash;5 хранилище. Реалистично: $10&ndash;30/мес.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FULL PIPELINE ===== -->
+<section class="pipeline-section">
+  <div class="container">
+    <div class="section-label">Пайплайн</div>
+    <h2 class="section-title">Полный конвейер креативов</h2>
+    <p class="section-desc">От анализа видео до чат-воронки. Gemini для анализа, LLM для скриптов, TTS для озвучки, AI для видео, FFmpeg для сборки.</p>
+
+    <div class="pipeline-flow fade-in">
+      <div class="pipeline-step">
+        <div class="pipeline-connector"></div>
+        <div class="step-icon">&#128270;</div>
+        <div class="step-num">ШАГ 01</div>
+        <div class="step-name">Анализ видео</div>
+        <div class="step-tool">Gemini 2.5 Flash</div>
+        <div class="step-time">20 мин VSL = $0.11</div>
+        <div class="step-cost">~$0.11</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="pipeline-connector"></div>
+        <div class="step-icon">&#9999;&#65039;</div>
+        <div class="step-num">ШАГ 02</div>
+        <div class="step-name">Скрипт + хуки</div>
+        <div class="step-tool">Claude / GPT-4</div>
+        <div class="step-time">~10 сек</div>
+        <div class="step-cost">$0</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="pipeline-connector"></div>
+        <div class="step-icon">&#127908;</div>
+        <div class="step-num">ШАГ 03</div>
+        <div class="step-name">TTS озвучка</div>
+        <div class="step-tool">Fish Audio / Chatterbox</div>
+        <div class="step-time">Real-time</div>
+        <div class="step-cost">$0&ndash;10</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="pipeline-connector"></div>
+        <div class="step-icon">&#129489;</div>
+        <div class="step-num">ШАГ 04</div>
+        <div class="step-name">Talking Head</div>
+        <div class="step-tool">LivePortrait + MuseTalk</div>
+        <div class="step-time">~2&ndash;10 мин</div>
+        <div class="step-cost">$10&ndash;20</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="pipeline-connector"></div>
+        <div class="step-icon">&#127916;</div>
+        <div class="step-num">ШАГ 05</div>
+        <div class="step-name">B-roll сцены</div>
+        <div class="step-tool">Veo / Kling / Wan</div>
+        <div class="step-time">~4 мин/клип</div>
+        <div class="step-cost">$7&ndash;38</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="pipeline-connector"></div>
+        <div class="step-icon">&#9986;&#65039;</div>
+        <div class="step-num">ШАГ 06</div>
+        <div class="step-name">Сборка</div>
+        <div class="step-tool">FFmpeg / DaVinci MCP</div>
+        <div class="step-time">~30 сек</div>
+        <div class="step-cost">$0</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-icon">&#128172;</div>
+        <div class="step-num">ШАГ 07</div>
+        <div class="step-name">Чат-воронка</div>
+        <div class="step-tool">Manychat / Respond.io</div>
+        <div class="step-time">Автоматически</div>
+        <div class="step-cost">$0&ndash;29</div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px;">
+      <div class="scheme-card" style="margin: 0;">
+        <div style="padding: 24px;">
+          <h4 style="font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 12px;">Автонарезка VSL</h4>
+          <p style="font-size: 14px; color: var(--text-mid); margin-bottom: 12px;"><strong>OpusClip</strong> ($15&ndash;29/мес) &mdash; лидер для автонарезки длинных видео в шорты с AI-выбором хайлайтов, субтитрами и оценкой вирусности.</p>
+          <p style="font-size: 14px; color: var(--text-mid);">Кастомный пайплайн: Gemini API (таймстемпы) &rarr; FFmpeg/Remotion (нарезка) &rarr; LLM (хуки и CTA).</p>
+        </div>
+      </div>
+      <div class="scheme-card" style="margin: 0;">
+        <div style="padding: 24px;">
+          <h4 style="font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 12px;">Чат-агенты с видео</h4>
+          <p style="font-size: 14px; color: var(--text-mid); margin-bottom: 12px;"><strong>Botnoi AI</strong> &mdash; для LINE в Таиланде (AI Digital Human, поддержка LINE OA).</p>
+          <p style="font-size: 14px; color: var(--text-mid);"><strong>Respond.io</strong> &mdash; WhatsApp омниканал с AI-агентами. <strong>Manychat</strong> &mdash; бесплатно до 1K контактов, Pro $15/мес + AI $29/мес.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAYMENT FROM RUSSIA ===== -->
+<section class="payment-section">
+  <div class="container">
+    <div class="section-label">Оплата</div>
+    <h2 class="section-title">Оплата из России</h2>
+    <p class="section-desc">Российские Visa/Mastercard не работают для международных SaaS из-за санкций. Проверенные решения:</p>
+
+    <div class="payment-cards fade-in">
+      <div class="payment-card">
+        <div class="pay-icon">&#128179;</div>
+        <div class="pay-name">Heleket</div>
+        <div class="pay-desc">Виртуальные Visa/Mastercard с пополнением через крипту (BTC, USDT). Заточен под AI-сервисы: ChatGPT, Midjourney, Claude, ElevenLabs.</div>
+      </div>
+      <div class="payment-card">
+        <div class="pay-icon">&#9889;</div>
+        <div class="pay-name">Buvei</div>
+        <div class="pay-desc">Мгновенный выпуск карт, USDT top-up (TRC20/ERC20), PCI DSS compliant. Надёжный вариант для подписок.</div>
+      </div>
+      <div class="payment-card">
+        <div class="pay-icon">&#8383;</div>
+        <div class="pay-name">Крипто напрямую</div>
+        <div class="pay-desc">ElevenLabs принимает крипту на checkout. Plati.market: WebMoney, USDT, LTC, BTC, PayPal.</div>
+      </div>
+      <div class="payment-card">
+        <div class="pay-icon">&#127760;</div>
+        <div class="pay-name">AdvCash</div>
+        <div class="pay-desc">Виртуальные и физические карты, доступны из России. Пополнение разными способами.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== THREE BUDGET SCENARIOS ===== -->
+<section class="cost-section">
+  <div class="container">
+    <div class="section-label">Бюджет</div>
+    <h2 class="section-title">Три бюджетных варианта</h2>
+    <p class="section-desc">От технического максимума до минимального бюджета. Оптимальная комбинация для $50&ndash;150/мес.</p>
+
+    <div class="cost-scenarios fade-in">
+      <!-- Variant A -->
+      <div class="cost-card">
+        <div class="cost-card-header">
+          <div class="scenario-label">Вариант A &mdash; Технический</div>
+          <div class="scenario-title">Максимум контента</div>
+          <div class="scenario-desc">Безлимит talking head + 2500 Veo B-roll + автомонтаж</div>
+          <div class="scenario-price">$160<small>/мес</small></div>
+        </div>
+        <div class="cost-card-body">
+          <div class="cost-row"><span class="cost-item">Talking head</span><span class="cost-tool">Vast.ai + LivePortrait + MuseTalk</span><span class="cost-val">~$20</span></div>
+          <div class="cost-row"><span class="cost-item">Видеогенерация</span><span class="cost-tool">Google AI Ultra (промо)</span><span class="cost-val">$125</span></div>
+          <div class="cost-row"><span class="cost-item">Озвучка</span><span class="cost-tool">Chatterbox / Fish Audio</span><span class="cost-val">$0&ndash;10</span></div>
+          <div class="cost-row"><span class="cost-item">Автомонтаж</span><span class="cost-tool">DaVinci Studio + MCP</span><span class="cost-val">$0 (разово $295)</span></div>
+          <div class="cost-row"><span class="cost-item">Анализ/скрипты</span><span class="cost-tool">Gemini API</span><span class="cost-val">$1&ndash;5</span></div>
+          <div class="cost-row"><span class="cost-item">ИТОГО</span><span class="cost-val">$146&ndash;160</span></div>
+        </div>
+      </div>
+
+      <!-- Variant B -->
+      <div class="cost-card featured">
+        <div class="cost-card-header">
+          <div class="scenario-label">Вариант B &mdash; Рекомендуемый</div>
+          <div class="scenario-title">Простой и стабильный</div>
+          <div class="scenario-desc">Безлимит Avatar III + 30 Sora/день + автонарезка VSL</div>
+          <div class="scenario-price">$69<small>/мес</small></div>
+        </div>
+        <div class="cost-card-body">
+          <div class="cost-row"><span class="cost-item">Talking head</span><span class="cost-tool">HeyGen Creator (годовой)</span><span class="cost-val">$24</span></div>
+          <div class="cost-row"><span class="cost-item">Озвучка</span><span class="cost-tool">Fish Audio</span><span class="cost-val">$10</span></div>
+          <div class="cost-row"><span class="cost-item">Автонарезка</span><span class="cost-tool">OpusClip Starter</span><span class="cost-val">$15</span></div>
+          <div class="cost-row"><span class="cost-item">Скрипты/анализ</span><span class="cost-tool">ChatGPT Plus (Sora в комплекте)</span><span class="cost-val">$20</span></div>
+          <div class="cost-row"><span class="cost-item">Автомонтаж</span><span class="cost-tool">DaVinci Free + CapCut</span><span class="cost-val">$0</span></div>
+          <div class="cost-row"><span class="cost-item">ИТОГО</span><span class="cost-val">$69</span></div>
+        </div>
+      </div>
+
+      <!-- Variant C -->
+      <div class="cost-card">
+        <div class="cost-card-header">
+          <div class="scenario-label">Вариант C &mdash; Минимум</div>
+          <div class="scenario-title">Минимальный бюджет</div>
+          <div class="scenario-desc">Требует технической компетенции и времени на настройку</div>
+          <div class="scenario-price">$22<small>/мес</small></div>
+        </div>
+        <div class="cost-card-body">
+          <div class="cost-row"><span class="cost-item">Talking head</span><span class="cost-tool">Vast.ai + open-source</span><span class="cost-val">~$15</span></div>
+          <div class="cost-row"><span class="cost-item">Озвучка</span><span class="cost-tool">Chatterbox (self-hosted)</span><span class="cost-val">$0</span></div>
+          <div class="cost-row"><span class="cost-item">Видео-фон</span><span class="cost-tool">Kling AI Standard</span><span class="cost-val">$7</span></div>
+          <div class="cost-row"><span class="cost-item">Скрипты</span><span class="cost-tool">Gemini API (бесплатный tier)</span><span class="cost-val">$0</span></div>
+          <div class="cost-row"><span class="cost-item">Монтаж</span><span class="cost-tool">DaVinci Free + CapCut</span><span class="cost-val">$0</span></div>
+          <div class="cost-row"><span class="cost-item">ИТОГО</span><span class="cost-val">~$22</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMPARISON TABLE ===== -->
+<section class="matrix-section">
+  <div class="container">
+    <div class="section-label">Сравнение</div>
+    <h2 class="section-title">Все схемы рядом</h2>
+    <p class="section-desc">Сводная таблица всех 6 подходов по ключевым параметрам.</p>
+
+    <div class="benchmark-grid fade-in">
+      <table class="benchmark-table" style="min-width: 1000px;">
+        <thead>
+          <tr>
+            <th>Параметр</th>
+            <th>Google Ultra</th>
+            <th>Plati Market</th>
+            <th>Sora Pro</th>
+            <th>DaVinci MCP</th>
+            <th>Local GPU</th>
+            <th>HeyGen</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="model-name">Стоимость/мес</span></td>
+            <td><span class="cost-tag">$125&ndash;250</span></td>
+            <td><span class="cost-tag">$5&ndash;15</span></td>
+            <td><span class="cost-tag">$200</span></td>
+            <td><span class="cost-tag">$0</span> <span style="font-size:11px;color:var(--text-light)">(разовая $295)</span></td>
+            <td><span class="cost-tag">$10&ndash;30</span></td>
+            <td><span class="cost-tag">$24&ndash;149</span></td>
+          </tr>
+          <tr>
+            <td><span class="model-name">Видео/мес</span></td>
+            <td>~2500 (8с)</td>
+            <td>~2500&ndash;4500</td>
+            <td>~3000+</td>
+            <td>N/A (монтаж)</td>
+            <td>Безлимит</td>
+            <td>Безлимит (III)</td>
+          </tr>
+          <tr>
+            <td><span class="model-name">Реалистичность</span></td>
+            <td><span class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9734;</span></td>
+            <td><span class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9734;</span></td>
+            <td><span class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span></td>
+            <td>N/A</td>
+            <td><span class="star-rating">&#9733;&#9733;&#9733;&#9734;&#9734;&ndash;&#9733;&#9733;&#9733;&#9733;&#9734;</span></td>
+            <td><span class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span></td>
+          </tr>
+          <tr>
+            <td><span class="model-name">Talking head</span></td>
+            <td>Слабо</td>
+            <td>Слабо</td>
+            <td>Средне</td>
+            <td>N/A</td>
+            <td>Хорошо</td>
+            <td><strong>Отлично</strong></td>
+          </tr>
+          <tr>
+            <td><span class="model-name">Сложность</span></td>
+            <td>Средняя</td>
+            <td>Низкая</td>
+            <td>Низкая</td>
+            <td>Высокая</td>
+            <td>Высокая</td>
+            <td>Низкая</td>
+          </tr>
+          <tr>
+            <td><span class="model-name">Риск бана</span></td>
+            <td><span class="model-badge badge-cheap">Средний</span></td>
+            <td><span class="model-badge badge-danger">Очень высокий</span></td>
+            <td><span class="model-badge badge-fast">Низкий</span></td>
+            <td><span class="model-badge badge-fast">Нет</span></td>
+            <td><span class="model-badge badge-fast">Нет</span></td>
+            <td><span class="model-badge badge-fast">Низкий</span></td>
+          </tr>
+          <tr>
+            <td><span class="model-name">Custom аватар</span></td>
+            <td>Нет</td>
+            <td>Нет</td>
+            <td>Cameo only</td>
+            <td>N/A</td>
+            <td><strong>Полный</strong></td>
+            <td>Да</td>
+          </tr>
+          <tr>
+            <td><span class="model-name">Оплата из РФ</span></td>
+            <td>Крипто-карта</td>
+            <td>Plati напрямую</td>
+            <td>Крипто-карта</td>
+            <td>Разовая покупка</td>
+            <td>Крипто</td>
+            <td>Крипто-карта</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONCLUSION ===== -->
+<section class="insights-section">
+  <div class="container">
+    <div class="section-label">Выводы</div>
+    <h2 class="section-title">Три ключевых инсайта</h2>
+
+    <div class="insight-cards fade-in">
+      <div class="insight-card">
+        <div class="insight-num">01</div>
+        <div class="insight-title">Один сервис не решит задачу</div>
+        <div class="insight-text">Veo генерирует великолепные сцены, но не клонирует конкретного человека. Sora создаёт кинематографическое видео, но блокирует загрузку лиц по safety policy. HeyGen делает идеальные talking heads, но стоит дорого при масштабировании. Оптимальная стратегия &mdash; специализированный конвейер из 3&ndash;4 инструментов.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-num">02</div>
+        <div class="insight-title">HeyGen за $69 &mdash; лучший баланс</div>
+        <div class="insight-text">Вариант B с HeyGen Creator + Fish Audio + OpusClip + ChatGPT Plus &mdash; наиболее сбалансированный по простоте и результату. Безлимитные Avatar III видео, ~30 Sora-генераций/день для B-roll, 200 мин озвучки, автонарезка. Не требует технического стека.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-num">03</div>
+        <div class="insight-title">Plati &mdash; только для тестов</div>
+        <div class="insight-text">Вьетнамские подписки за $5 &mdash; расходный инструмент для тестирования, не для production. А Sora Pro за $200 имеет смысл только если бюджет позволяет и нужен именно кинематографический уровень визуала для B-roll &mdash; для talking head она парадоксально слабее более дешёвых решений.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>Схемы видео-продакшна для трафика &bull; Сборка &times; Zinin Corporation &bull; Февраль 2026</p>
+  <p style="margin-top:8px;opacity:.6">Данные актуальны на 23 февраля 2026. Цены и доступность сервисов могут изменяться.</p>
+</footer>
+
+<script>
+// Scroll-triggered fade-in animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Animate quality bars on scroll
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.bar-fill').forEach(bar => {
+        const w = bar.style.width;
+        bar.style.width = '0';
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => { bar.style.width = w; });
+        });
+      });
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.benchmark-grid').forEach(el => barObserver.observe(el));
+</script>
+
+</body>
+</html>

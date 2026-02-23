@@ -1,0 +1,1878 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Video Factory Blueprint — Инфографика</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FDF6EC;
+  --bg-card: #FFFAF2;
+  --bg-dark: #2D2520;
+  --accent-warm: #E8734A;
+  --accent-gold: #D4A843;
+  --accent-teal: #2A9D8F;
+  --accent-coral: #E76F51;
+  --accent-rose: #C4556E;
+  --accent-sage: #6B8F71;
+  --text-dark: #3D3229;
+  --text-mid: #6B5D52;
+  --text-light: #A8957F;
+  --border: rgba(61,50,41,0.08);
+  --shadow: 0 4px 24px rgba(45,37,32,0.06);
+  --shadow-lg: 0 12px 48px rgba(45,37,32,0.1);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--bg);
+  color: var(--text-dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 24px;
+  overflow: hidden;
+  background: linear-gradient(160deg, #FDF6EC 0%, #F7E8D4 30%, #FDEBD0 60%, #FDF6EC 100%);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,115,74,0.12) 0%, transparent 70%);
+  animation: float1 18s ease-in-out infinite;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -150px; left: -150px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(42,157,143,0.1) 0%, transparent 70%);
+  animation: float2 22s ease-in-out infinite;
+}
+
+@keyframes float1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-40px,30px)} }
+@keyframes float2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(30px,-25px)} }
+
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 900px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border-radius: 100px;
+  background: rgba(232,115,74,0.1);
+  color: var(--accent-warm);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  animation: fadeDown .8s ease-out;
+}
+
+.hero-badge::before {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent-warm);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.3)} }
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(42px, 7vw, 84px);
+  font-weight: 900;
+  line-height: 1.05;
+  color: var(--text-dark);
+  margin-bottom: 24px;
+  animation: fadeDown 1s ease-out .1s both;
+}
+
+.hero h1 span {
+  background: linear-gradient(135deg, var(--accent-warm), var(--accent-coral));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 20px;
+  color: var(--text-mid);
+  max-width: 600px;
+  margin: 0 auto 48px;
+  font-weight: 300;
+  animation: fadeDown 1s ease-out .2s both;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+  animation: fadeDown 1s ease-out .35s both;
+}
+
+.hero-stat {
+  text-align: center;
+}
+
+.hero-stat .num {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px;
+  font-weight: 900;
+  color: var(--accent-warm);
+}
+
+.hero-stat .label {
+  font-size: 13px;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== LAYOUT ===== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+section {
+  padding: 80px 0;
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+  margin-bottom: 16px;
+}
+
+.section-label::before {
+  content: '';
+  width: 32px; height: 2px;
+  background: var(--accent-warm);
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-dark);
+}
+
+.section-desc {
+  font-size: 17px;
+  color: var(--text-mid);
+  max-width: 680px;
+  margin-bottom: 48px;
+  font-weight: 300;
+}
+
+/* ===== PIPELINE SECTION ===== */
+.pipeline-section {
+  background: linear-gradient(180deg, var(--bg) 0%, #F5EDE0 100%);
+}
+
+.pipeline-flow {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  overflow-x: auto;
+  padding: 20px 0;
+  position: relative;
+}
+
+.pipeline-step {
+  flex: 1;
+  min-width: 200px;
+  position: relative;
+  text-align: center;
+  padding: 0 8px;
+}
+
+.pipeline-step .step-icon {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  font-size: 28px;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.pipeline-step:hover .step-icon {
+  transform: scale(1.1) translateY(-4px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+}
+
+.pipeline-step:nth-child(1) .step-icon { background: linear-gradient(135deg, #E8734A, #D4603A); color: #fff; }
+.pipeline-step:nth-child(2) .step-icon { background: linear-gradient(135deg, #D4A843, #C49A38); color: #fff; }
+.pipeline-step:nth-child(3) .step-icon { background: linear-gradient(135deg, #2A9D8F, #238B7E); color: #fff; }
+.pipeline-step:nth-child(4) .step-icon { background: linear-gradient(135deg, #C4556E, #B04A60); color: #fff; }
+.pipeline-step:nth-child(5) .step-icon { background: linear-gradient(135deg, #6B8F71, #5C7D63); color: #fff; }
+
+.pipeline-step .step-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-light);
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
+
+.pipeline-step .step-name {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text-dark);
+  margin-bottom: 4px;
+}
+
+.pipeline-step .step-tool {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--accent-teal);
+  margin-bottom: 6px;
+}
+
+.pipeline-step .step-time {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.pipeline-step .step-cost {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-warm);
+  margin-top: 4px;
+}
+
+.pipeline-connector {
+  position: absolute;
+  top: 36px;
+  left: calc(50% + 36px);
+  width: calc(100% - 72px);
+  height: 2px;
+  z-index: 1;
+}
+
+.pipeline-connector::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: repeating-linear-gradient(90deg, var(--accent-warm) 0, var(--accent-warm) 6px, transparent 6px, transparent 12px);
+  opacity: .3;
+}
+
+.pipeline-connector::after {
+  content: '→';
+  position: absolute;
+  right: -6px;
+  top: -10px;
+  color: var(--accent-warm);
+  font-size: 18px;
+  opacity: .5;
+}
+
+.pipeline-step:last-child .pipeline-connector { display: none; }
+
+.pipeline-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 48px;
+}
+
+.pipeline-summary-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.pipeline-summary-card .val {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--accent-warm);
+}
+
+.pipeline-summary-card .lbl {
+  font-size: 12px;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+/* ===== BENCHMARK TABLE ===== */
+.benchmark-section {
+  background: var(--bg);
+}
+
+.benchmark-grid {
+  overflow-x: auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+}
+
+.benchmark-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.benchmark-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+
+.benchmark-table th {
+  background: var(--bg-dark);
+  color: #F5EDE0;
+  padding: 14px 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.benchmark-table th:first-child {
+  border-radius: var(--radius) 0 0 0;
+}
+
+.benchmark-table th:last-child {
+  border-radius: 0 var(--radius) 0 0;
+}
+
+.benchmark-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-card);
+  vertical-align: middle;
+}
+
+.benchmark-table tr:hover td {
+  background: #FFF5E8;
+}
+
+.benchmark-table tr.recommended td {
+  background: rgba(232,115,74,0.06);
+  border-left: 3px solid var(--accent-warm);
+}
+
+.benchmark-table tr.recommended td:first-child {
+  font-weight: 700;
+}
+
+.model-name {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.model-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.badge-best { background: rgba(232,115,74,0.15); color: var(--accent-warm); }
+.badge-fast { background: rgba(42,157,143,0.15); color: var(--accent-teal); }
+.badge-cheap { background: rgba(212,168,67,0.15); color: var(--accent-gold); }
+.badge-new { background: rgba(196,85,110,0.15); color: var(--accent-rose); }
+
+.quality-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.quality-bar .bar-bg {
+  width: 80px;
+  height: 8px;
+  background: rgba(61,50,41,0.08);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.quality-bar .bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1s ease-out;
+}
+
+.quality-bar .bar-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 32px;
+}
+
+.vram-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgba(107,143,113,0.12);
+  color: var(--accent-sage);
+  white-space: nowrap;
+}
+
+.cost-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-warm);
+}
+
+/* ===== TTS SECTION ===== */
+.tts-section {
+  background: linear-gradient(180deg, #F5EDE0 0%, var(--bg) 100%);
+}
+
+.tts-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.tts-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  transition: transform .3s ease, box-shadow .3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.tts-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.tts-card.pick::before {
+  content: '★ РЕКОМЕНДАЦИЯ';
+  position: absolute;
+  top: 16px; right: -32px;
+  background: var(--accent-warm);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 4px 40px;
+  transform: rotate(45deg);
+}
+
+.tts-card .tts-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.tts-card .tts-origin {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+.tts-card .tts-price {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--accent-warm);
+  margin-bottom: 4px;
+}
+
+.tts-card .tts-price-note {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+.tts-card .tts-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tts-card .tts-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+.tts-card .tts-meta-row .label {
+  color: var(--text-light);
+}
+
+.tts-card .tts-meta-row .value {
+  font-weight: 600;
+}
+
+.tts-card .tts-quality-dots {
+  display: flex;
+  gap: 4px;
+}
+
+.tts-card .tts-quality-dots .dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: rgba(61,50,41,0.1);
+}
+
+.tts-card .tts-quality-dots .dot.filled {
+  background: var(--accent-teal);
+}
+
+/* ===== COST SCENARIOS ===== */
+.cost-section {
+  background: var(--bg);
+}
+
+.cost-scenarios {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.cost-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform .3s ease;
+}
+
+.cost-card:hover {
+  transform: translateY(-4px);
+}
+
+.cost-card.featured {
+  border: 2px solid var(--accent-warm);
+  box-shadow: var(--shadow-lg);
+}
+
+.cost-card-header {
+  padding: 28px 24px 20px;
+  position: relative;
+}
+
+.cost-card.featured .cost-card-header {
+  background: linear-gradient(135deg, rgba(232,115,74,0.08), rgba(212,168,67,0.06));
+}
+
+.cost-card-header .scenario-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 6px;
+}
+
+.cost-card-header .scenario-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.cost-card-header .scenario-desc {
+  font-size: 13px;
+  color: var(--text-mid);
+}
+
+.cost-card-header .scenario-price {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--accent-warm);
+}
+
+.cost-card-header .scenario-price small {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-light);
+}
+
+.cost-card-body {
+  padding: 0 24px 24px;
+}
+
+.cost-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.cost-row:last-child {
+  border-bottom: none;
+  font-weight: 700;
+  color: var(--accent-warm);
+}
+
+.cost-row .cost-item {
+  color: var(--text-mid);
+}
+
+.cost-row .cost-tool {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--accent-teal);
+}
+
+.cost-row .cost-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+}
+
+/* ===== GPU COMPARISON ===== */
+.gpu-section {
+  background: linear-gradient(180deg, var(--bg) 0%, #F5EDE0 100%);
+}
+
+.gpu-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.gpu-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: transform .3s ease;
+}
+
+.gpu-card:hover { transform: translateY(-3px); }
+
+.gpu-card.pick {
+  border-color: var(--accent-warm);
+  background: linear-gradient(180deg, rgba(232,115,74,0.04) 0%, var(--bg-card) 100%);
+}
+
+.gpu-card .gpu-provider {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 8px;
+}
+
+.gpu-card .gpu-model {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.gpu-card .gpu-vram {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--accent-sage);
+  margin-bottom: 16px;
+}
+
+.gpu-card .gpu-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--accent-warm);
+}
+
+.gpu-card .gpu-price-unit {
+  font-size: 13px;
+  color: var(--text-light);
+}
+
+.gpu-card .gpu-monthly {
+  font-size: 13px;
+  color: var(--text-mid);
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.gpu-card .gpu-monthly strong {
+  color: var(--accent-warm);
+}
+
+/* ===== QUALITY MATRIX ===== */
+.matrix-section {
+  background: #F5EDE0;
+}
+
+.matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+.matrix-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform .3s ease;
+}
+
+.matrix-card:hover { transform: translateY(-3px); }
+
+.matrix-card-rank {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.matrix-rank-num {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 900;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.matrix-card:nth-child(1) .matrix-rank-num { background: linear-gradient(135deg, var(--accent-warm), var(--accent-coral)); }
+.matrix-card:nth-child(2) .matrix-rank-num { background: linear-gradient(135deg, var(--accent-gold), #C49A38); }
+.matrix-card:nth-child(3) .matrix-rank-num { background: linear-gradient(135deg, var(--accent-teal), #1E8C7E); }
+.matrix-card:nth-child(4) .matrix-rank-num { background: linear-gradient(135deg, var(--accent-rose), #A8465C); }
+.matrix-card:nth-child(5) .matrix-rank-num { background: linear-gradient(135deg, var(--accent-sage), #567A5C); }
+
+.matrix-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.matrix-card-subtitle {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+
+.matrix-card-body {
+  padding: 20px 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.matrix-metric {
+  text-align: center;
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  background: rgba(61,50,41,0.03);
+}
+
+.matrix-metric .val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--accent-warm);
+}
+
+.matrix-metric .lbl {
+  font-size: 10px;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin-top: 2px;
+}
+
+/* ===== B-ROLL SECTION ===== */
+.broll-section {
+  background: var(--bg);
+}
+
+.broll-comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .broll-comparison { grid-template-columns: 1fr; }
+}
+
+.broll-column h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.broll-column h3 .tag {
+  font-size: 10px;
+  font-family: 'Source Sans 3', sans-serif;
+  padding: 4px 10px;
+  border-radius: 100px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.broll-column:first-child h3 .tag {
+  background: rgba(42,157,143,0.12);
+  color: var(--accent-teal);
+}
+
+.broll-column:last-child h3 .tag {
+  background: rgba(212,168,67,0.12);
+  color: var(--accent-gold);
+}
+
+.broll-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  margin-bottom: 10px;
+  font-size: 14px;
+  transition: background .2s;
+}
+
+.broll-item:hover { background: #FFF5E8; }
+
+.broll-item .broll-model {
+  font-weight: 600;
+}
+
+.broll-item .broll-quality {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.broll-item .broll-price {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  color: var(--accent-warm);
+  white-space: nowrap;
+}
+
+/* ===== ROADMAP ===== */
+.roadmap-section {
+  background: var(--bg-dark);
+  color: #F5EDE0;
+}
+
+.roadmap-section .section-label {
+  color: var(--accent-gold);
+}
+
+.roadmap-section .section-label::before {
+  background: var(--accent-gold);
+}
+
+.roadmap-section .section-title {
+  color: #F5EDE0;
+}
+
+.roadmap-section .section-desc {
+  color: rgba(245,237,224,0.6);
+}
+
+.roadmap-timeline {
+  position: relative;
+  padding-left: 40px;
+}
+
+.roadmap-timeline::before {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent-warm), var(--accent-teal), var(--accent-gold));
+  opacity: .4;
+}
+
+.roadmap-item {
+  position: relative;
+  margin-bottom: 36px;
+  padding: 20px 24px;
+  background: rgba(245,237,224,0.05);
+  border: 1px solid rgba(245,237,224,0.08);
+  border-radius: var(--radius-sm);
+  transition: background .3s;
+}
+
+.roadmap-item:hover {
+  background: rgba(245,237,224,0.08);
+}
+
+.roadmap-item::before {
+  content: '';
+  position: absolute;
+  left: -33px;
+  top: 24px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-warm);
+  background: var(--bg-dark);
+}
+
+.roadmap-item .rm-phase {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin-bottom: 6px;
+}
+
+.roadmap-item .rm-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.roadmap-item .rm-desc {
+  font-size: 14px;
+  color: rgba(245,237,224,0.6);
+  line-height: 1.5;
+}
+
+.roadmap-item .rm-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.roadmap-item .rm-tech span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 4px;
+  background: rgba(42,157,143,0.15);
+  color: var(--accent-teal);
+}
+
+/* ===== INSIGHTS ===== */
+.insights-section {
+  background: var(--bg);
+}
+
+.insight-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.insight-card {
+  position: relative;
+  padding: 32px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform .3s;
+}
+
+.insight-card:hover { transform: translateY(-4px); }
+
+.insight-card:nth-child(1) { background: linear-gradient(135deg, rgba(232,115,74,0.08), rgba(232,115,74,0.02)); border: 1px solid rgba(232,115,74,0.15); }
+.insight-card:nth-child(2) { background: linear-gradient(135deg, rgba(42,157,143,0.08), rgba(42,157,143,0.02)); border: 1px solid rgba(42,157,143,0.15); }
+.insight-card:nth-child(3) { background: linear-gradient(135deg, rgba(212,168,67,0.08), rgba(212,168,67,0.02)); border: 1px solid rgba(212,168,67,0.15); }
+
+.insight-card .insight-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 64px;
+  font-weight: 900;
+  position: absolute;
+  top: 12px; right: 20px;
+  opacity: .07;
+  color: var(--text-dark);
+}
+
+.insight-card .insight-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.insight-card .insight-text {
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.6;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  padding: 48px 24px;
+  font-size: 12px;
+  color: var(--text-light);
+  border-top: 1px solid var(--border);
+}
+
+/* ===== ANIMATION ON SCROLL ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s ease-out, transform .7s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .hero-stats { gap: 24px; }
+  .pipeline-flow { flex-direction: column; align-items: center; }
+  .pipeline-connector { display: none !important; }
+  .pipeline-step { min-width: unset; width: 100%; max-width: 260px; margin-bottom: 16px; }
+  .cost-scenarios { grid-template-columns: 1fr; }
+  .matrix-grid { grid-template-columns: 1fr; }
+  .gpu-cards { grid-template-columns: 1fr 1fr; }
+  .cost-card-header .scenario-price { position: static; margin-top: 12px; }
+}
+
+@media (max-width: 480px) {
+  .gpu-cards { grid-template-columns: 1fr; }
+  section { padding: 48px 0; }
+  .nav-inner { gap: 4px; }
+  .nav-link { font-size: 12px; padding: 6px 12px; }
+}
+
+/* ===== NAVIGATION ===== */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(253,246,236,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 8px;
+  padding: 12px 0;
+  overflow-x: auto;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-mid);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.nav-link:hover {
+  color: var(--accent-warm);
+  background: rgba(232,115,74,0.06);
+}
+
+.nav-link.active {
+  color: #fff;
+  background: var(--accent-warm);
+  border-color: var(--accent-warm);
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="meeting_prep_romanpov.html" class="nav-link">Подготовка к встрече</a>
+    <a href="meeting_prep_video_factory.html" class="nav-link active">AI Video Factory</a>
+    <a href="meeting_prep_traffic_schemes.html" class="nav-link">Схемы трафика</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Февраль 2026 • Сборка</div>
+    <h1>AI Video<br>Factory <span>$11/мес</span></h1>
+    <p class="hero-sub">Полный blueprint контент-завода: 3–4 вертикальных видео в день с полностью AI-сгенерированными аватарами блогеров</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="num">14</div>
+        <div class="label">моделей<br>в бенчмарке</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">$0.09</div>
+        <div class="label">стоимость<br>за минуту видео</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">30'</div>
+        <div class="label">GPU-время<br>в день</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">5×</div>
+        <div class="label">масштаб<br>блогеров</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== PIPELINE ===== -->
+<section class="pipeline-section">
+  <div class="container">
+    <div class="section-label">Архитектура</div>
+    <h2 class="section-title">Конвейер производства видео</h2>
+    <p class="section-desc">Пять шагов от идеи до публикации. Полная автоматизация через Python cron job на VPS.</p>
+
+    <div class="pipeline-flow fade-in">
+      <div class="pipeline-step">
+        <div class="pipeline-connector"></div>
+        <div class="step-icon">📝</div>
+        <div class="step-num">ШАГ 01</div>
+        <div class="step-name">Скрипт</div>
+        <div class="step-tool">Claude / GPT-4</div>
+        <div class="step-time">~10 сек</div>
+        <div class="step-cost">$0</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="pipeline-connector"></div>
+        <div class="step-icon">🎙</div>
+        <div class="step-num">ШАГ 02</div>
+        <div class="step-name">TTS → Аудио</div>
+        <div class="step-tool">Silero v5 (CPU)</div>
+        <div class="step-time">~8 сек / мин</div>
+        <div class="step-cost">$0</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="pipeline-connector"></div>
+        <div class="step-icon">🧑</div>
+        <div class="step-num">ШАГ 03</div>
+        <div class="step-name">Talking Head</div>
+        <div class="step-tool">EchoMimic V3</div>
+        <div class="step-time">~2 мин / видео</div>
+        <div class="step-cost">~$3/мес</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="pipeline-connector"></div>
+        <div class="step-icon">🎬</div>
+        <div class="step-num">ШАГ 04</div>
+        <div class="step-name">B-roll</div>
+        <div class="step-tool">Wan 2.1 (1.3B)</div>
+        <div class="step-time">~4 мин / клип</div>
+        <div class="step-cost">~$2/мес</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-icon">✂️</div>
+        <div class="step-num">ШАГ 05</div>
+        <div class="step-name">Сборка</div>
+        <div class="step-tool">FFmpeg (CPU)</div>
+        <div class="step-time">~30 сек</div>
+        <div class="step-cost">$0</div>
+      </div>
+    </div>
+
+    <div class="pipeline-summary fade-in">
+      <div class="pipeline-summary-card">
+        <div class="val">25 мин</div>
+        <div class="lbl">GPU-время / день</div>
+      </div>
+      <div class="pipeline-summary-card">
+        <div class="val">$0.08</div>
+        <div class="lbl">GPU-стоимость / день</div>
+      </div>
+      <div class="pipeline-summary-card">
+        <div class="val">CX22</div>
+        <div class="lbl">Hetzner VPS — $5/мес</div>
+      </div>
+      <div class="pipeline-summary-card">
+        <div class="val">100%</div>
+        <div class="lbl">Автоматизация</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TALKING HEAD BENCHMARK ===== -->
+<section class="benchmark-section">
+  <div class="container">
+    <div class="section-label">Бенчмарк</div>
+    <h2 class="section-title">Talking Head модели</h2>
+    <p class="section-desc">Сводная таблица всех доступных моделей для генерации говорящих аватаров. Отсортировано по соотношению качество/цена.</p>
+
+    <div class="benchmark-grid fade-in">
+      <table class="benchmark-table">
+        <thead>
+          <tr>
+            <th>Модель</th>
+            <th>Качество</th>
+            <th>VRAM</th>
+            <th>Скорость (1 мин)</th>
+            <th>Lip-sync RU</th>
+            <th>Лицензия</th>
+            <th>$/мес (1 блогер)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="recommended">
+            <td><span class="model-name">EchoMimic V3</span> <span class="model-badge badge-best">BEST VALUE</span></td>
+            <td>
+              <div class="quality-bar">
+                <div class="bar-bg"><div class="bar-fill" style="width:80%;background:linear-gradient(90deg,var(--accent-teal),var(--accent-warm))"></div></div>
+                <span class="bar-val">8/10</span>
+              </div>
+            </td>
+            <td><span class="vram-tag">12-24 GB</span></td>
+            <td>~50 сек/240 кадров</td>
+            <td>✅ Хорошо</td>
+            <td>Open</td>
+            <td><span class="cost-tag">$3</span></td>
+          </tr>
+          <tr>
+            <td><span class="model-name">Hallo3</span> <span class="model-badge badge-best">TOP QUALITY</span></td>
+            <td>
+              <div class="quality-bar">
+                <div class="bar-bg"><div class="bar-fill" style="width:85%;background:linear-gradient(90deg,var(--accent-teal),var(--accent-warm))"></div></div>
+                <span class="bar-val">8.5/10</span>
+              </div>
+            </td>
+            <td><span class="vram-tag">24 GB</span></td>
+            <td>10–15 мин на 4090</td>
+            <td>✅ Хорошо</td>
+            <td>CogVideo</td>
+            <td><span class="cost-tag">$8</span></td>
+          </tr>
+          <tr>
+            <td><span class="model-name">MuseTalk v1.5</span> <span class="model-badge badge-fast">FASTEST</span></td>
+            <td>
+              <div class="quality-bar">
+                <div class="bar-bg"><div class="bar-fill" style="width:75%;background:linear-gradient(90deg,var(--accent-teal),var(--accent-warm))"></div></div>
+                <span class="bar-val">7.5/10</span>
+              </div>
+            </td>
+            <td><span class="vram-tag">12-16 GB</span></td>
+            <td>Real-time 30fps</td>
+            <td>✅ Мульти-язык</td>
+            <td>MIT ✨</td>
+            <td><span class="cost-tag">$2</span></td>
+          </tr>
+          <tr>
+            <td><span class="model-name">Wan 2.2 S2V</span> <span class="model-badge badge-new">NEW</span></td>
+            <td>
+              <div class="quality-bar">
+                <div class="bar-bg"><div class="bar-fill" style="width:82%;background:linear-gradient(90deg,var(--accent-teal),var(--accent-warm))"></div></div>
+                <span class="bar-val">8.2/10</span>
+              </div>
+            </td>
+            <td><span class="vram-tag">24+ GB</span></td>
+            <td>Среднее</td>
+            <td>✅ Нативно</td>
+            <td>Apache 2.0</td>
+            <td><span class="cost-tag">$5</span></td>
+          </tr>
+          <tr>
+            <td><span class="model-name">LivePortrait</span> <span class="model-badge badge-cheap">LOW VRAM</span></td>
+            <td>
+              <div class="quality-bar">
+                <div class="bar-bg"><div class="bar-fill" style="width:80%;background:linear-gradient(90deg,var(--accent-teal),var(--accent-warm))"></div></div>
+                <span class="bar-val">8/10</span>
+              </div>
+            </td>
+            <td><span class="vram-tag">6 GB</span></td>
+            <td>78fps на 4090 ⚡</td>
+            <td>⚠️ Video-driven</td>
+            <td>Permissive</td>
+            <td><span class="cost-tag">$1</span></td>
+          </tr>
+          <tr>
+            <td><span class="model-name">HunyuanPortrait</span></td>
+            <td>
+              <div class="quality-bar">
+                <div class="bar-bg"><div class="bar-fill" style="width:85%;background:linear-gradient(90deg,var(--accent-teal),var(--accent-warm))"></div></div>
+                <span class="bar-val">8.5/10</span>
+              </div>
+            </td>
+            <td><span class="vram-tag">24 GB</span></td>
+            <td>Среднее</td>
+            <td>⚠️ Video-driven</td>
+            <td>Research</td>
+            <td><span class="cost-tag">$6</span></td>
+          </tr>
+          <tr>
+            <td><span class="model-name">HeyGen Avatar III</span> <span class="model-badge badge-fast">SAAS</span></td>
+            <td>
+              <div class="quality-bar">
+                <div class="bar-bg"><div class="bar-fill" style="width:80%;background:linear-gradient(90deg,var(--accent-teal),var(--accent-warm))"></div></div>
+                <span class="bar-val">8/10</span>
+              </div>
+            </td>
+            <td><span class="vram-tag">Cloud</span></td>
+            <td>2–5 мин</td>
+            <td>✅ Встроенный</td>
+            <td>SaaS</td>
+            <td><span class="cost-tag">$29</span></td>
+          </tr>
+          <tr>
+            <td><span class="model-name">SadTalker</span> <span class="model-badge badge-cheap">BUDGET</span></td>
+            <td>
+              <div class="quality-bar">
+                <div class="bar-bg"><div class="bar-fill" style="width:65%;background:linear-gradient(90deg,var(--accent-teal),var(--accent-warm))"></div></div>
+                <span class="bar-val">6.5/10</span>
+              </div>
+            </td>
+            <td><span class="vram-tag">4-8 GB</span></td>
+            <td>Секунды ⚡⚡</td>
+            <td>✅ Базовый</td>
+            <td>Open</td>
+            <td><span class="cost-tag">$1</span></td>
+          </tr>
+          <tr>
+            <td><span class="model-name">Wav2Lip</span> <span class="model-badge badge-cheap">ULTRA BUDGET</span></td>
+            <td>
+              <div class="quality-bar">
+                <div class="bar-bg"><div class="bar-fill" style="width:55%;background:linear-gradient(90deg,var(--accent-teal),var(--accent-warm))"></div></div>
+                <span class="bar-val">5.5/10</span>
+              </div>
+            </td>
+            <td><span class="vram-tag">2-4 GB</span></td>
+            <td>Near real-time</td>
+            <td>✅ Базовый</td>
+            <td>Open</td>
+            <td><span class="cost-tag">&lt;$1</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TTS ===== -->
+<section class="tts-section">
+  <div class="container">
+    <div class="section-label">Озвучка</div>
+    <h2 class="section-title">Русский TTS — голоса блогеров</h2>
+    <p class="section-desc">Четыре лучших варианта для русскоязычной озвучки. Все работают с 120+ мин/мес.</p>
+
+    <div class="tts-cards fade-in">
+      <div class="tts-card pick">
+        <div class="tts-name">Silero v5</div>
+        <div class="tts-origin">🇷🇺 Россия • snakers4</div>
+        <div class="tts-price">$0</div>
+        <div class="tts-price-note">Open source, MIT лицензия</div>
+        <div class="tts-meta">
+          <div class="tts-meta-row">
+            <span class="label">Качество RU</span>
+            <div class="tts-quality-dots">
+              <span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </div>
+          </div>
+          <div class="tts-meta-row"><span class="label">GPU</span><span class="value" style="color:var(--accent-teal)">Не нужен (CPU)</span></div>
+          <div class="tts-meta-row"><span class="label">Скорость</span><span class="value">20× real-time</span></div>
+          <div class="tts-meta-row"><span class="label">Эмоции</span><span class="value">Нейтральный</span></div>
+        </div>
+      </div>
+
+      <div class="tts-card">
+        <div class="tts-name">Azure Neural TTS</div>
+        <div class="tts-origin">🇺🇸 Microsoft</div>
+        <div class="tts-price">$0</div>
+        <div class="tts-price-note">500K символов/мес бесплатно (~555 мин)</div>
+        <div class="tts-meta">
+          <div class="tts-meta-row">
+            <span class="label">Качество RU</span>
+            <div class="tts-quality-dots">
+              <span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </div>
+          </div>
+          <div class="tts-meta-row"><span class="label">GPU</span><span class="value" style="color:var(--accent-teal)">Cloud API</span></div>
+          <div class="tts-meta-row"><span class="label">Скорость</span><span class="value">Real-time</span></div>
+          <div class="tts-meta-row"><span class="label">Эмоции</span><span class="value">Средние</span></div>
+        </div>
+      </div>
+
+      <div class="tts-card">
+        <div class="tts-name">CosyVoice 3</div>
+        <div class="tts-origin">🇨🇳 Alibaba • Apache 2.0</div>
+        <div class="tts-price">$0</div>
+        <div class="tts-price-note">Self-hosted, 3-4 GB VRAM</div>
+        <div class="tts-meta">
+          <div class="tts-meta-row">
+            <span class="label">Качество RU</span>
+            <div class="tts-quality-dots">
+              <span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </div>
+          </div>
+          <div class="tts-meta-row"><span class="label">GPU</span><span class="value">3-4 GB VRAM</span></div>
+          <div class="tts-meta-row"><span class="label">Клонирование</span><span class="value" style="color:var(--accent-warm)">Zero-shot ✨</span></div>
+          <div class="tts-meta-row"><span class="label">Эмоции</span><span class="value">Высокие</span></div>
+        </div>
+      </div>
+
+      <div class="tts-card">
+        <div class="tts-name">ElevenLabs</div>
+        <div class="tts-origin">🇺🇸 Premium</div>
+        <div class="tts-price">$22</div>
+        <div class="tts-price-note">Creator план, ~100 мин/мес</div>
+        <div class="tts-meta">
+          <div class="tts-meta-row">
+            <span class="label">Качество RU</span>
+            <div class="tts-quality-dots">
+              <span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span>
+            </div>
+          </div>
+          <div class="tts-meta-row"><span class="label">GPU</span><span class="value" style="color:var(--accent-teal)">Cloud API</span></div>
+          <div class="tts-meta-row"><span class="label">Клонирование</span><span class="value" style="color:var(--accent-warm)">6 секунд ✨</span></div>
+          <div class="tts-meta-row"><span class="label">Эмоции</span><span class="value" style="color:var(--accent-warm)">Максимальные 🔥</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== B-ROLL ===== -->
+<section class="broll-section">
+  <div class="container">
+    <div class="section-label">Перебивки</div>
+    <h2 class="section-title">B-roll — кинематографичные вставки</h2>
+    <p class="section-desc">5–7 клипов по 2–3 секунды на видео. ~525 клипов/мес при 5 блогерах.</p>
+
+    <div class="broll-comparison fade-in">
+      <div class="broll-column">
+        <h3>Self-hosted <span class="tag">GPU batch</span></h3>
+        <div class="broll-item">
+          <div><span class="broll-model">LTX-Video</span><br><span class="broll-quality">6-8 GB • 10 сек/клип ⚡</span></div>
+          <span class="broll-price">~$1/мес</span>
+        </div>
+        <div class="broll-item" style="border-left: 3px solid var(--accent-warm);">
+          <div><span class="broll-model">Wan 2.1 (1.3B)</span><br><span class="broll-quality">8 GB • 4 мин/клип • Хорошее</span></div>
+          <span class="broll-price">~$15/мес</span>
+        </div>
+        <div class="broll-item">
+          <div><span class="broll-model">HunyuanVideo 1.5</span><br><span class="broll-quality">14-24 GB • 10 мин/клип • Отлично</span></div>
+          <span class="broll-price">~$38/мес</span>
+        </div>
+        <div class="broll-item">
+          <div><span class="broll-model">CogVideoX-5B</span><br><span class="broll-quality">16-24 GB • 8 мин/клип</span></div>
+          <span class="broll-price">~$31/мес</span>
+        </div>
+      </div>
+
+      <div class="broll-column">
+        <h3>API/SaaS <span class="tag">Pay per use</span></h3>
+        <div class="broll-item" style="border-left: 3px solid var(--accent-gold);">
+          <div><span class="broll-model">Kling 2.5 (fal.ai)</span><br><span class="broll-quality">Top-3 Elo • Camera control</span></div>
+          <span class="broll-price">~$38/мес</span>
+        </div>
+        <div class="broll-item">
+          <div><span class="broll-model">Pika 2.5</span><br><span class="broll-quality">Elo #9 • Базовый контроль</span></div>
+          <span class="broll-price">~$39/мес</span>
+        </div>
+        <div class="broll-item">
+          <div><span class="broll-model">Runway Gen-4 Turbo</span><br><span class="broll-quality">Высокое • Хороший контроль</span></div>
+          <span class="broll-price">~$79/мес</span>
+        </div>
+        <div class="broll-item">
+          <div><span class="broll-model">Luma Unlimited</span><br><span class="broll-quality">Безлимит • Медленная очередь</span></div>
+          <span class="broll-price">$30/мес flat</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GPU INFRA ===== -->
+<section class="gpu-section">
+  <div class="container">
+    <div class="section-label">Инфраструктура</div>
+    <h2 class="section-title">GPU-платформы для batch-рендеринга</h2>
+    <p class="section-desc">Оплата по секундам. 30 мин/день = $2–5/мес. Без серверов 24/7.</p>
+
+    <div class="gpu-cards fade-in">
+      <div class="gpu-card pick">
+        <div class="gpu-provider">RunPod</div>
+        <div class="gpu-model">RTX 4090</div>
+        <div class="gpu-vram">24 GB VRAM</div>
+        <div class="gpu-price">$0.20<span class="gpu-price-unit">/час</span></div>
+        <div class="gpu-monthly">50 мин/день → <strong>$5/мес</strong></div>
+      </div>
+      <div class="gpu-card pick">
+        <div class="gpu-provider">RunPod</div>
+        <div class="gpu-model">RTX 3090</div>
+        <div class="gpu-vram">24 GB VRAM</div>
+        <div class="gpu-price">$0.11<span class="gpu-price-unit">/час</span></div>
+        <div class="gpu-monthly">50 мин/день → <strong>$2.75/мес</strong></div>
+      </div>
+      <div class="gpu-card">
+        <div class="gpu-provider">Vast.ai</div>
+        <div class="gpu-model">RTX 3090</div>
+        <div class="gpu-vram">24 GB • Interruptible</div>
+        <div class="gpu-price">$0.08<span class="gpu-price-unit">/час</span></div>
+        <div class="gpu-monthly">50 мин/день → <strong>$2/мес</strong></div>
+      </div>
+      <div class="gpu-card">
+        <div class="gpu-provider">SaladCloud</div>
+        <div class="gpu-model">RTX 4090</div>
+        <div class="gpu-vram">24 GB • Batch</div>
+        <div class="gpu-price">$0.16<span class="gpu-price-unit">/час</span></div>
+        <div class="gpu-monthly">50 мин/день → <strong>$4/мес</strong></div>
+      </div>
+      <div class="gpu-card">
+        <div class="gpu-provider">Modal</div>
+        <div class="gpu-model">L4 / A100</div>
+        <div class="gpu-vram">24-80 GB</div>
+        <div class="gpu-price" style="font-size:22px">$30 free<span class="gpu-price-unit"> кредитов/мес</span></div>
+        <div class="gpu-monthly">Покрывает 1 блогера <strong>бесплатно</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COST SCENARIOS ===== -->
+<section class="cost-section">
+  <div class="container">
+    <div class="section-label">Бюджет</div>
+    <h2 class="section-title">Три сценария стоимости</h2>
+    <p class="section-desc">От минимального MVP до quality-оптимизированного production.</p>
+
+    <div class="cost-scenarios fade-in">
+      <!-- Scenario A -->
+      <div class="cost-card featured">
+        <div class="cost-card-header">
+          <div class="scenario-label">Сценарий A — Рекомендуемый</div>
+          <div class="scenario-title">1 блогер, баланс</div>
+          <div class="scenario-desc">90–120 мин видео/мес</div>
+          <div class="scenario-price">$11<small>/мес</small></div>
+        </div>
+        <div class="cost-card-body">
+          <div class="cost-row"><span class="cost-item">VPS (Hetzner CX22)</span><span class="cost-val">$5</span></div>
+          <div class="cost-row"><span class="cost-item">TTS</span><span class="cost-tool">Silero v5 (CPU)</span><span class="cost-val">$0</span></div>
+          <div class="cost-row"><span class="cost-item">Talking Head</span><span class="cost-tool">EchoMimic V3</span><span class="cost-val">$3</span></div>
+          <div class="cost-row"><span class="cost-item">B-roll</span><span class="cost-tool">Wan 2.1</span><span class="cost-val">$2</span></div>
+          <div class="cost-row"><span class="cost-item">Сборка</span><span class="cost-tool">FFmpeg</span><span class="cost-val">$0</span></div>
+          <div class="cost-row"><span class="cost-item">Storage (RunPod)</span><span class="cost-tool">20 GB</span><span class="cost-val">$1</span></div>
+          <div class="cost-row"><span class="cost-item">ИТОГО</span><span class="cost-val">$11</span></div>
+        </div>
+      </div>
+
+      <!-- Scenario B -->
+      <div class="cost-card">
+        <div class="cost-card-header">
+          <div class="scenario-label">Сценарий B — Премиум</div>
+          <div class="scenario-title">1 блогер, макс качество</div>
+          <div class="scenario-desc">Premium голос + кинематограф</div>
+          <div class="scenario-price">$74<small>/мес</small></div>
+        </div>
+        <div class="cost-card-body">
+          <div class="cost-row"><span class="cost-item">VPS</span><span class="cost-val">$5</span></div>
+          <div class="cost-row"><span class="cost-item">TTS</span><span class="cost-tool">ElevenLabs</span><span class="cost-val">$22</span></div>
+          <div class="cost-row"><span class="cost-item">Talking Head</span><span class="cost-tool">Hallo3 (4090)</span><span class="cost-val">$8</span></div>
+          <div class="cost-row"><span class="cost-item">B-roll</span><span class="cost-tool">Kling 2.5 API</span><span class="cost-val">$38</span></div>
+          <div class="cost-row"><span class="cost-item">Storage</span><span class="cost-tool">RunPod</span><span class="cost-val">$1</span></div>
+          <div class="cost-row"><span class="cost-item">ИТОГО</span><span class="cost-val">$74</span></div>
+        </div>
+      </div>
+
+      <!-- Scenario C -->
+      <div class="cost-card">
+        <div class="cost-card-header">
+          <div class="scenario-label">Сценарий C — Масштаб</div>
+          <div class="scenario-title">5 блогеров</div>
+          <div class="scenario-desc">450–600 мин видео/мес</div>
+          <div class="scenario-price">$40<small>/мес</small></div>
+        </div>
+        <div class="cost-card-body">
+          <div class="cost-row"><span class="cost-item">VPS</span><span class="cost-val">$5</span></div>
+          <div class="cost-row"><span class="cost-item">TTS</span><span class="cost-tool">Azure (free tier)</span><span class="cost-val">$0</span></div>
+          <div class="cost-row"><span class="cost-item">Talking Head</span><span class="cost-tool">EchoMimic × 2 pods</span><span class="cost-val">$22</span></div>
+          <div class="cost-row"><span class="cost-item">B-roll</span><span class="cost-tool">Wan 2.1 batch</span><span class="cost-val">$10</span></div>
+          <div class="cost-row"><span class="cost-item">Storage</span><span class="cost-tool">50 GB</span><span class="cost-val">$3</span></div>
+          <div class="cost-row"><span class="cost-item">ИТОГО</span><span class="cost-val">$40</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== QUALITY MATRIX ===== -->
+<section class="matrix-section">
+  <div class="container">
+    <div class="section-label">Рейтинг</div>
+    <h2 class="section-title">Quality / Cost матрица</h2>
+    <p class="section-desc">Топ-5 конфигураций по соотношению качества на доллар.</p>
+
+    <div class="matrix-grid fade-in">
+      <div class="matrix-card">
+        <div class="matrix-card-rank">
+          <div class="matrix-rank-num">1</div>
+          <div>
+            <div class="matrix-card-title">EchoMimic + Silero + Wan</div>
+            <div class="matrix-card-subtitle">Self-hosted batch pipeline</div>
+          </div>
+        </div>
+        <div class="matrix-card-body">
+          <div class="matrix-metric"><div class="val">7.5</div><div class="lbl">Качество /10</div></div>
+          <div class="matrix-metric"><div class="val">$11</div><div class="lbl">$/мес</div></div>
+          <div class="matrix-metric"><div class="val">$0.09</div><div class="lbl">$/мин видео</div></div>
+          <div class="matrix-metric"><div class="val">0.68</div><div class="lbl">Quality/$/10</div></div>
+        </div>
+      </div>
+
+      <div class="matrix-card">
+        <div class="matrix-card-rank">
+          <div class="matrix-rank-num">2</div>
+          <div>
+            <div class="matrix-card-title">MuseTalk + CosyVoice + LTX</div>
+            <div class="matrix-card-subtitle">Ultra-lightweight pipeline</div>
+          </div>
+        </div>
+        <div class="matrix-card-body">
+          <div class="matrix-metric"><div class="val">7.0</div><div class="lbl">Качество /10</div></div>
+          <div class="matrix-metric"><div class="val">$8</div><div class="lbl">$/мес</div></div>
+          <div class="matrix-metric"><div class="val">$0.07</div><div class="lbl">$/мин видео</div></div>
+          <div class="matrix-metric"><div class="val">0.88</div><div class="lbl">Quality/$/10</div></div>
+        </div>
+      </div>
+
+      <div class="matrix-card">
+        <div class="matrix-card-rank">
+          <div class="matrix-rank-num">3</div>
+          <div>
+            <div class="matrix-card-title">HeyGen Creator</div>
+            <div class="matrix-card-subtitle">SaaS all-in-one</div>
+          </div>
+        </div>
+        <div class="matrix-card-body">
+          <div class="matrix-metric"><div class="val">8.0</div><div class="lbl">Качество /10</div></div>
+          <div class="matrix-metric"><div class="val">$29</div><div class="lbl">$/мес</div></div>
+          <div class="matrix-metric"><div class="val">$0.24</div><div class="lbl">$/мин видео</div></div>
+          <div class="matrix-metric"><div class="val">0.28</div><div class="lbl">Quality/$/10</div></div>
+        </div>
+      </div>
+
+      <div class="matrix-card">
+        <div class="matrix-card-rank">
+          <div class="matrix-rank-num">4</div>
+          <div>
+            <div class="matrix-card-title">Hallo3 + ElevenLabs + Kling</div>
+            <div class="matrix-card-subtitle">Premium quality pipeline</div>
+          </div>
+        </div>
+        <div class="matrix-card-body">
+          <div class="matrix-metric"><div class="val">8.5</div><div class="lbl">Качество /10</div></div>
+          <div class="matrix-metric"><div class="val">$74</div><div class="lbl">$/мес</div></div>
+          <div class="matrix-metric"><div class="val">$0.62</div><div class="lbl">$/мин видео</div></div>
+          <div class="matrix-metric"><div class="val">0.11</div><div class="lbl">Quality/$/10</div></div>
+        </div>
+      </div>
+
+      <div class="matrix-card">
+        <div class="matrix-card-rank">
+          <div class="matrix-rank-num">5</div>
+          <div>
+            <div class="matrix-card-title">SadTalker + Silero (Budget)</div>
+            <div class="matrix-card-subtitle">Minimum viable production</div>
+          </div>
+        </div>
+        <div class="matrix-card-body">
+          <div class="matrix-metric"><div class="val">5.5</div><div class="lbl">Качество /10</div></div>
+          <div class="matrix-metric"><div class="val">$6</div><div class="lbl">$/мес</div></div>
+          <div class="matrix-metric"><div class="val">$0.05</div><div class="lbl">$/мин видео</div></div>
+          <div class="matrix-metric"><div class="val">0.92</div><div class="lbl">Quality/$/10</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ROADMAP ===== -->
+<section class="roadmap-section">
+  <div class="container">
+    <div class="section-label">План действий</div>
+    <h2 class="section-title">Roadmap запуска</h2>
+    <p class="section-desc">Пошаговый план от MVP до 5 блогеров. Старт с Лизы.</p>
+
+    <div class="roadmap-timeline fade-in">
+      <div class="roadmap-item">
+        <div class="rm-phase">Дни 1–2</div>
+        <div class="rm-title">Генерация аватара Лизы</div>
+        <div class="rm-desc">Создать AI-портрет блогера через FLUX/SDXL + RealVisXL. Сгенерировать 5-10 вариаций ракурсов через IP-Adapter Face. Настроить голос через Silero v5.</div>
+        <div class="rm-tech"><span>FLUX</span><span>IP-Adapter</span><span>Silero v5</span></div>
+      </div>
+      <div class="roadmap-item">
+        <div class="rm-phase">Дни 3–4</div>
+        <div class="rm-title">Настройка GPU pipeline</div>
+        <div class="rm-desc">Создать Docker образ с EchoMimic V3 + Wan 2.1. Развернуть на RunPod. Настроить persistent volume для весов модели. Тест: 1 видео от скрипта до финала.</div>
+        <div class="rm-tech"><span>Docker</span><span>RunPod</span><span>EchoMimic V3</span><span>Wan 2.1</span></div>
+      </div>
+      <div class="roadmap-item">
+        <div class="rm-phase">Дни 5–6</div>
+        <div class="rm-title">Автоматизация на VPS</div>
+        <div class="rm-desc">Python скрипт: генерация скриптов → TTS → запуск RunPod pod → генерация видео → сборка FFmpeg → загрузка результатов. Cron job на ежедневный запуск.</div>
+        <div class="rm-tech"><span>Python</span><span>FFmpeg</span><span>Cron</span><span>Hetzner VPS</span></div>
+      </div>
+      <div class="roadmap-item">
+        <div class="rm-phase">Дни 7–9</div>
+        <div class="rm-title">Запуск Лизы + 2-й блогер</div>
+        <div class="rm-desc">Публикация первых видео в Instagram + Telegram. A/B тест стилей (реалистичный vs иллюстрация). Запуск 2-го аватара-блогера по той же схеме.</div>
+        <div class="rm-tech"><span>Instagram API</span><span>Telegram Bot</span><span>A/B test</span></div>
+      </div>
+      <div class="roadmap-item">
+        <div class="rm-phase">Недели 3–4</div>
+        <div class="rm-title">Масштабирование до 5 блогеров</div>
+        <div class="rm-desc">Параллельная генерация на 2× RunPod pods. Оптимизация: B-roll библиотека для повторного использования. Локализация на другие языки через CosyVoice voice cloning.</div>
+        <div class="rm-tech"><span>Scale ×5</span><span>CosyVoice</span><span>B-roll library</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== KEY INSIGHTS ===== -->
+<section class="insights-section">
+  <div class="container">
+    <div class="section-label">Выводы</div>
+    <h2 class="section-title">Три ключевых инсайта</h2>
+
+    <div class="insight-cards fade-in">
+      <div class="insight-card">
+        <div class="insight-num">01</div>
+        <div class="insight-title">Batch = экономия 20×</div>
+        <div class="insight-text">Разница между $200/мес и $10/мес — в том, арендуете ли вы GPU 24/7 или 30 минут в день. RunPod с посекундной оплатой делает GPU доступными.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-num">02</div>
+        <div class="insight-title">TTS бесплатно при любом объёме</div>
+        <div class="insight-text">Azure/Google дают 500K+ символов бесплатно. Silero v5 работает на CPU без GPU. Стоимость определяет видео-генерация, не озвучка.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-num">03</div>
+        <div class="insight-title">Китайский open-source доминирует</div>
+        <div class="insight-text">Wan, EchoMimic, CosyVoice, HunyuanVideo — каждый компонент рекомендуемого стека от китайских лабораторий, с Apache 2.0 лицензиями.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>AI Video Factory Blueprint • Сборка × Zinin Corporation • Февраль 2026</p>
+  <p style="margin-top:8px;opacity:.6">Данные актуальны на 21 февраля 2026. Цены и доступность моделей могут изменяться.</p>
+</footer>
+
+<script>
+// Scroll-triggered fade-in animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Animate quality bars on scroll
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.bar-fill').forEach(bar => {
+        const w = bar.style.width;
+        bar.style.width = '0';
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => { bar.style.width = w; });
+        });
+      });
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.benchmark-grid').forEach(el => barObserver.observe(el));
+</script>
+
+</body>
+</html>

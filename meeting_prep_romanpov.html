@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Подготовка к встрече — Roman Povolotski / ZarGates</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FDF6EC;
+  --bg-card: #FFFAF2;
+  --bg-dark: #2D2520;
+  --accent-warm: #E8734A;
+  --accent-gold: #D4A843;
+  --accent-teal: #2A9D8F;
+  --accent-coral: #E76F51;
+  --accent-rose: #C4556E;
+  --accent-sage: #6B8F71;
+  --text-dark: #3D3229;
+  --text-mid: #6B5D52;
+  --text-light: #A8957F;
+  --border: rgba(61,50,41,0.08);
+  --shadow: 0 4px 24px rgba(45,37,32,0.06);
+  --shadow-lg: 0 12px 48px rgba(45,37,32,0.1);
+  --radius: 16px;
+  --radius-sm: 10px;
+
+  --green: #6B8F71;
+  --green-dim: rgba(107,143,113,0.12);
+  --orange: #D4A843;
+  --orange-dim: rgba(212,168,67,0.12);
+  --red: #C4556E;
+  --red-dim: rgba(196,85,110,0.12);
+  --cyan: #2A9D8F;
+  --cyan-dim: rgba(42,157,143,0.12);
+  --pink: #C4556E;
+  --pink-dim: rgba(196,85,110,0.12);
+  --accent-dim: rgba(232,115,74,0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--bg);
+  color: var(--text-dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== NAVIGATION ===== */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(253,246,236,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 8px;
+  padding: 12px 0;
+  overflow-x: auto;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-mid);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.nav-link:hover {
+  color: var(--accent-warm);
+  background: rgba(232,115,74,0.06);
+}
+
+.nav-link.active {
+  color: #fff;
+  background: var(--accent-warm);
+  border-color: var(--accent-warm);
+}
+
+/* ===== CONTAINER ===== */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 24px 60px;
+  overflow: hidden;
+  background: linear-gradient(160deg, #FDF6EC 0%, #F7E8D4 30%, #FDEBD0 60%, #FDF6EC 100%);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,115,74,0.12) 0%, transparent 70%);
+  animation: float1 18s ease-in-out infinite;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -150px; left: -150px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(42,157,143,0.1) 0%, transparent 70%);
+  animation: float2 22s ease-in-out infinite;
+}
+
+@keyframes float1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-40px,30px)} }
+@keyframes float2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(30px,-25px)} }
+
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 900px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border-radius: 100px;
+  background: rgba(232,115,74,0.1);
+  color: var(--accent-warm);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  animation: fadeDown .8s ease-out;
+}
+
+.hero-badge::before {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent-warm);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.3)} }
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--text-dark);
+  margin-bottom: 20px;
+  animation: fadeDown 1s ease-out .1s both;
+}
+
+.hero h1 span {
+  background: linear-gradient(135deg, var(--accent-warm), var(--accent-coral));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 20px;
+  color: var(--text-mid);
+  max-width: 600px;
+  margin: 0 auto 16px;
+  font-weight: 300;
+  animation: fadeDown 1s ease-out .2s both;
+}
+
+.hero-date {
+  font-size: 14px;
+  color: var(--text-light);
+  font-family: 'JetBrains Mono', monospace;
+  animation: fadeDown 1s ease-out .3s both;
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== SECTIONS ===== */
+section { padding: 80px 0; }
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+  margin-bottom: 16px;
+}
+
+.section-label::before {
+  content: '';
+  width: 32px; height: 2px;
+  background: var(--accent-warm);
+}
+
+.section-label .num {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  margin-bottom: 28px;
+  color: var(--text-dark);
+}
+
+/* ===== CARDS ===== */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 768px) { .card-grid { grid-template-columns: 1fr; } }
+
+/* ===== COMPANY CARD ===== */
+.company-header { display: flex; align-items: center; gap: 20px; margin-bottom: 20px; }
+.company-logo {
+  width: 72px; height: 72px; border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--accent-warm), var(--accent-coral));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; font-weight: 800; color: white;
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(232,115,74,0.25);
+}
+.company-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px; font-weight: 700; color: var(--text-dark);
+}
+.company-tagline { font-size: 14px; color: var(--text-mid); }
+
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 20px; }
+@media (max-width: 768px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+.stat-item {
+  background: rgba(61,50,41,0.03);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  text-align: center;
+}
+.stat-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; font-weight: 900; color: var(--accent-warm);
+}
+.stat-label { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+
+/* ===== PERSON CARD ===== */
+.person-card { display: flex; gap: 20px; align-items: flex-start; }
+.person-avatar {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-teal), var(--accent-warm));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; font-weight: 700; color: white; flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(42,157,143,0.2);
+}
+.person-info { flex: 1; }
+.person-name { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--text-dark); }
+.person-role { font-size: 14px; color: var(--accent-warm); margin-bottom: 8px; font-weight: 600; }
+.person-bio { font-size: 14px; color: var(--text-mid); }
+
+/* ===== TAGS ===== */
+.tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px 10px; border-radius: 6px;
+  font-size: 12px; font-weight: 600;
+  margin: 2px;
+}
+.tag-accent { background: var(--accent-dim); color: var(--accent-warm); }
+.tag-green { background: var(--green-dim); color: var(--green); }
+.tag-orange { background: var(--orange-dim); color: var(--orange); }
+.tag-cyan { background: var(--cyan-dim); color: var(--cyan); }
+.tag-pink { background: var(--pink-dim); color: var(--pink); }
+
+/* ===== CONTEXT BLOCK ===== */
+.context-msg {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-warm);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: var(--text-mid);
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease;
+}
+.context-msg:hover { transform: translateX(4px); }
+.context-msg .sender { font-weight: 700; color: var(--accent-warm); font-size: 12px; margin-bottom: 4px; letter-spacing: 0.5px; }
+.context-msg.voice { border-left-color: var(--accent-gold); }
+.context-msg.voice .sender { color: var(--accent-gold); }
+
+/* ===== RECOMMENDATIONS ===== */
+.rec-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.rec-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+.rec-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: var(--radius-sm);
+  font-family: 'Playfair Display', serif;
+  font-size: 16px; font-weight: 900;
+  margin-bottom: 12px;
+}
+.rec-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text-dark); }
+.rec-desc { font-size: 14px; color: var(--text-mid); line-height: 1.6; }
+.rec-tools { margin-top: 10px; }
+
+/* ===== STACK VIS ===== */
+.stack-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+.stack-item {
+  background: rgba(61,50,41,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  flex: 1; min-width: 140px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.stack-item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+.stack-item .icon { font-size: 24px; margin-bottom: 6px; }
+.stack-item .name { font-size: 13px; font-weight: 700; color: var(--text-dark); }
+.stack-item .desc { font-size: 11px; color: var(--text-light); margin-top: 2px; }
+
+/* ===== CASES ===== */
+.case-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 8px;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.case-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+.case-badge { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
+.case-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--text-dark); }
+.case-desc { font-size: 13px; color: var(--text-mid); }
+.case-metrics { display: flex; gap: 16px; margin-top: 8px; flex-wrap: wrap; }
+.case-metric { font-size: 12px; color: var(--text-mid); }
+.case-metric strong { color: var(--accent-warm); font-family: 'JetBrains Mono', monospace; }
+
+/* ===== PAIN ANALYSIS ===== */
+.pain-item {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+.pain-item:last-child { border-bottom: none; }
+.pain-icon {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0; font-weight: 700;
+}
+.pain-text { flex: 1; }
+.pain-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; margin-bottom: 4px; color: var(--text-dark); }
+.pain-desc { font-size: 13px; color: var(--text-mid); line-height: 1.6; }
+
+/* ===== DIVIDER ===== */
+.divider { height: 1px; background: var(--border); margin: 0; }
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center; padding: 48px 24px;
+  font-size: 12px; color: var(--text-light);
+  border-top: 1px solid var(--border);
+}
+
+/* ===== SUB-CARDS (inline styled replacements) ===== */
+.sub-card {
+  background: rgba(61,50,41,0.03);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+}
+.sub-card-title { font-size: 13px; font-weight: 700; color: var(--text-dark); }
+.sub-card-desc { font-size: 12px; color: var(--text-mid); }
+
+/* ===== ANIMATION ON SCROLL ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s ease-out, transform .7s ease-out;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .hero { min-height: auto; padding: 60px 24px 40px; }
+  section { padding: 48px 0; }
+  .person-card { flex-direction: column; }
+}
+
+@media (max-width: 480px) {
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .nav-inner { gap: 4px; }
+  .nav-link { font-size: 12px; padding: 6px 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="meeting_prep_romanpov.html" class="nav-link active">Подготовка к встрече</a>
+    <a href="meeting_prep_video_factory.html" class="nav-link">AI Video Factory</a>
+    <a href="meeting_prep_traffic_schemes.html" class="nav-link">Схемы трафика</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Подготовка к встрече</div>
+    <h1>Встреча с <span>Roman Povolotski</span></h1>
+    <p class="hero-sub">CEO & Founder ZarGates — Web3 Gaming Infrastructure</p>
+    <p class="hero-date">23 февраля 2026 &middot; Подготовил: Zinin Corp AI</p>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- ===== 1. КОМПАНИЯ ===== -->
+<section>
+  <div class="section-label"><span class="num">01</span> Компания</div>
+  <h2>ZarGates</h2>
+  <div class="card fade-in">
+    <div class="company-header">
+      <div class="company-logo">ZG</div>
+      <div>
+        <div class="company-name">ZarGates</div>
+        <div class="company-tagline">Web3 Gaming Infrastructure for Web2 Studios &middot; Dubai, UAE &middot; Founded 2024</div>
+        <div style="margin-top:8px">
+          <span class="tag tag-accent">GameFi</span>
+          <span class="tag tag-cyan">TON Ecosystem</span>
+          <span class="tag tag-green">B2B SaaS + B2C</span>
+          <span class="tag tag-pink">NFT Stickers</span>
+          <span class="tag tag-orange">Telegram Mini Apps</span>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:14px;color:var(--text-mid);margin-bottom:20px;">
+      ZarGates помогает Web2 игровым студиям добавлять Web3-механики (ownership, rewards, monetization) без запуска токена и без блокчейн-экспертизы. B2C экосистема для геймеров + модульный B2B SaaS для студий.
+    </p>
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-value">$700K+</div>
+        <div class="stat-label">Revenue</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">100K+</div>
+        <div class="stat-label">MAU</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">710K+</div>
+        <div class="stat-label">Media Reach</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">9%</div>
+        <div class="stat-label">Conv. to Paying</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-grid fade-in">
+    <div class="card">
+      <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:12px;color:var(--text-dark);">Ключевые достижения</h3>
+      <ul style="font-size:13px;color:var(--text-mid);padding-left:16px;display:flex;flex-direction:column;gap:8px;">
+        <li>Break-even за 5 месяцев после Open Beta (Q4 2024)</li>
+        <li>CyberPort Hong Kong Incubation Programme (2 года, с сент 2025)</li>
+        <li>Партнёрство с Nekki (1B+ downloads) — интеграция Web3 в Fight Me</li>
+        <li>Warface: GO (30M+ users) — интеграция с Telegram + ZarGates</li>
+        <li>NFT-стикеры #1 в TON — x15 рост, 76.8K volume, floor 2.2 TON</li>
+        <li>Telegram Mini Apps партнёры: Star Riser, Match Money, Drft Party (1M+ MAU combined)</li>
+        <li>50 игр в плане на релиз</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:12px;color:var(--text-dark);">Продуктовая линейка (3 продукта)</h3>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="sub-card">
+          <div class="sub-card-title">1. ZarGates Platform</div>
+          <div class="sub-card-desc">Основная платформа: Web3 gaming ecosystem, marketplace, crowdinvesting, Trophy Road, referral system</div>
+        </div>
+        <div class="sub-card">
+          <div class="sub-card-title">2. AI Game Content Platform</div>
+          <div class="sub-card-desc">НОВЫЙ — "Roblox для взрослых": AI-генерация игрового контента (tower defense, DOTA-like), дистрибуция через ZarGates</div>
+        </div>
+        <div class="sub-card">
+          <div class="sub-card-title">3. Trading System</div>
+          <div class="sub-card-desc">НОВЫЙ — торговая система на базе AI</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== 2. РОМАН ===== -->
+<section>
+  <div class="section-label"><span class="num">02</span> Собеседник</div>
+  <h2>Roman Povolotski</h2>
+  <div class="card fade-in">
+    <div class="person-card">
+      <div class="person-avatar">RP</div>
+      <div class="person-info">
+        <div class="person-name">Roman Povolotski</div>
+        <div class="person-role">CEO & Founder, ZarGates</div>
+        <div class="person-bio">
+          20 лет в GameDev. Ex-Game Producer SIDUS HEROES ($150M cap, co-founder), Head of Studio at MyGames.
+          14 международных наград (Intel, USA, UAE, Germany, India, Israel, Russia).
+          Базируется в Дубае. Premium TG, активен в TON/Telegram-экосистеме.
+          Широкая сеть контактов в крипто и gamedev. Сам ведёт PR, напрямую взаимодействует с аудиторией.
+        </div>
+        <div style="margin-top:10px;">
+          <span class="tag tag-accent">@RomanPov</span>
+          <span class="tag tag-cyan">LinkedIn: povolotski</span>
+          <span class="tag tag-green">X: @Turvold</span>
+          <span class="tag tag-orange">Calendly: roman-zargates</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card fade-in">
+    <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:12px;color:var(--text-dark);">Команда ZarGates</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div class="sub-card">
+        <div class="sub-card-title">Aldar Sandanov — CTO</div>
+        <div class="sub-card-desc">20 лет Tech Management, Co-founder Crypton.studio, 100+ web3 проектов с 2016</div>
+      </div>
+      <div class="sub-card">
+        <div class="sub-card-title">Duncan Scott — CFO</div>
+        <div class="sub-card-desc">15 лет TradFi, Masters Finance & Wealth Management, crypto consultant с 2020</div>
+      </div>
+      <div class="sub-card">
+        <div class="sub-card-title">Ivan V. Ivanov — MD (Hong Kong)</div>
+        <div class="sub-card-desc">15+ лет startups & VC, 8 лет Web3, Founding Partner UVECON.VC, WOW SUMMIT</div>
+      </div>
+      <div class="sub-card">
+        <div class="sub-card-title">Marketing Team (~10 человек)</div>
+        <div class="sub-card-desc">2 крипто-аналитика, ops manager, marketing manager, аналитик, маркетолог, упаковщик, 2 дизайнера. Нет выделенного программиста на маркетинг</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== 3. КОНТЕКСТ ВСТРЕЧИ ===== -->
+<section>
+  <div class="section-label"><span class="num">03</span> Контекст встречи</div>
+  <h2>Что обсуждали в переписке</h2>
+
+  <div class="fade-in">
+    <div class="context-msg">
+      <div class="sender">Roman ZarGates &middot; 21 фев, 12:57</div>
+      Привет, снимаю шляпу, супер вдохновился контентом в вашем чате про блогера с ИИ. Очень хотим у себя такое же поднять. Понимаю, что время супер ценный ресурс, но все же можно договориться на звонок? Хочу спросить советов?
+    </div>
+
+    <div class="context-msg voice">
+      <div class="sender">Roman ZarGates &middot; 23 фев, 13:38 [голосовое 2:09]</div>
+      Хотим сделать фирму контента, но больше всего интересует какой функционал есть. Мы как компания занимаемся разработкой игр. <strong>Новый продукт — платформа по созданию игрового контента при помощи AI</strong> (конкурент Roblox для взрослых: tower defense, DOTA и т.д., всё при помощи нейронов). Мы как платформа даём дистрибуцию пользователям — они могут монетизировать этот контент.
+      <br><br>
+      Нам важно понять, <strong>какую часть маркетинга и продаж можно переложить на AI-агентов</strong>. У нас большая история в Twitter, растёт аудитория в TON. Хотим автоматизировать коммуникации, в идеале — холодные продажи. <strong>3 продукта:</strong> (1) ZarGates, (2) AI Game Content Platform, (3) Trading System — по каждому нужна своя контент-ферма.
+    </div>
+
+    <div class="context-msg voice">
+      <div class="sender">Roman ZarGates &middot; 23 фев, 13:45 [голосовое 2:35]</div>
+      Работаем в основном с <strong>инфлюенсерами + free mints</strong> (NFT дропы, лутбоксы). Аудитория на халяву получает NFT-контент, взаимодействует с ним, оставляет деньги. Последний дроп: <strong>x15 рост, 0.25 TON на старте → 4 TON сейчас</strong>. Готовится второй дроп.
+      <br><br>
+      Платная реклама и скрипт-проекты — <strong>не зашли</strong>, рынок сложный. Новый продукт (<strong>обёрнут как обычный</strong> — пользователь может платить фиатом, не касаясь крипты). В базе: инфлюенсеры + free mints.
+      <br><br>
+      <strong>Маркетинг:</strong> 2 крипто-аналитика, ops manager, маркетинг менеджер, аналитик, маркетолог, упаковщик, 2 дизайнера. Нет выделенного программиста — маркетинг-задачи встраиваются в общий pipeline.
+    </div>
+
+    <div class="context-msg voice">
+      <div class="sender">Roman ZarGates &middot; 23 фев, 13:48 [голосовое 0:42]</div>
+      По PR работаю сам лично. Очень большие контакты — много кто знает в TON-системе, Telegram, за пределами. Достаточно известный товарищ: 20 лет игрового продюсирования, 14 международных наград. Есть на Торг из V2. Достаточно плотно и напрямую взаимодействую со своей аудиторией.
+    </div>
+  </div>
+
+  <div class="card fade-in" style="margin-top:20px;border-left:3px solid var(--accent-sage);">
+    <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:8px;color:var(--accent-sage);">Ключевой запрос Романа</h3>
+    <ol style="font-size:14px;color:var(--text-mid);padding-left:20px;display:flex;flex-direction:column;gap:6px;">
+      <li><strong>AI-контент ферма</strong> — вдохновился нашим AI-блогером, хочет аналогичное для 3 продуктов</li>
+      <li><strong>AI-агенты для маркетинга</strong> — автоматизировать коммуникации, холодные продажи, контент</li>
+      <li><strong>Масштабирование без людей</strong> — нет выделенного программиста, хочет переложить на AI</li>
+    </ol>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== 4. АНАЛИЗ МАРКЕТИНГА ===== -->
+<section>
+  <div class="section-label"><span class="num">04</span> Анализ</div>
+  <h2>Текущее состояние маркетинга ZarGates</h2>
+
+  <div class="card fade-in">
+    <div class="pain-item">
+      <div class="pain-icon" style="background:var(--green-dim);color:var(--green);">+</div>
+      <div class="pain-text">
+        <div class="pain-title">Сильные стороны</div>
+        <div class="pain-desc">
+          Крепкое комьюнити в Telegram. NFT-стикеры #1 в TON (x15 рост). Партнёрство с Nekki (1B downloads).
+          Личный бренд Романа — 20 лет в gamedev, известен в TON-экосистеме. Break-even за 5 месяцев.
+          9% конверсия в paying users (отличный показатель для GameFi).
+        </div>
+      </div>
+    </div>
+    <div class="pain-item">
+      <div class="pain-icon" style="background:var(--red-dim);color:var(--red);">!</div>
+      <div class="pain-text">
+        <div class="pain-title">Боли / Проблемы</div>
+        <div class="pain-desc">
+          <strong>Платная реклама не работает</strong> — крипто-аудитория скриптована, холодный трафик конвертится плохо.
+          <strong>Зависимость от инфлюенсеров</strong> — основной канал, но дорого и не масштабируется.
+          <strong>Нет маркетинг-программиста</strong> — технические задачи конкурируют с продуктовыми.
+          <strong>3 продукта, одна команда</strong> — невозможно генерировать контент для трёх направлений вручную.
+          <strong>PR через одного человека (Романа)</strong> — не масштабируется, bottleneck.
+        </div>
+      </div>
+    </div>
+    <div class="pain-item">
+      <div class="pain-icon" style="background:var(--orange-dim);color:var(--orange);">?</div>
+      <div class="pain-text">
+        <div class="pain-title">Возможности</div>
+        <div class="pain-desc">
+          AI-инфлюенсеры для 3 продуктов (каждый со своим TOV и аудиторией).
+          Автоматизация контент-pipeline: скрипт → AI → публикация на 10+ площадках.
+          AI-агенты для холодного outreach в TG/X.
+          Автоматизация community management через AI.
+          Новый продукт (AI Game Content) — отдельная контент-стратегия с фокусом на Web2 аудиторию.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== 5. РЕКОМЕНДАЦИИ ===== -->
+<section>
+  <div class="section-label"><span class="num">05</span> Рекомендации</div>
+  <h2>Что мы рекомендуем</h2>
+
+  <div class="fade-in">
+    <div class="rec-card" style="border-left:3px solid var(--accent-warm);">
+      <div class="rec-num" style="background:var(--accent-dim);color:var(--accent-warm);">1</div>
+      <div class="rec-title">AI-инфлюенсеры для каждого продукта</div>
+      <div class="rec-desc">
+        Создать 3 виртуальных персонажа — по одному на каждый продукт. Каждый со своим голосом, внешностью, tone of voice и аудиторией.
+        <br><strong>ZarGates:</strong> Web3/GameFi эксперт, крипто-native, вещает на Twitter/X и TG.
+        <br><strong>AI Game Platform:</strong> Indie game creator / content creator, ориентирован на Web2 аудиторию, TikTok/YouTube Shorts/Instagram.
+        <br><strong>Trading System:</strong> Финансовый аналитик, Telegram + Twitter/X.
+      </div>
+      <div class="rec-tools">
+        <span class="tag tag-green">$0.50/блогер/мес</span>
+        <span class="tag tag-accent">Автопостинг 5+ платформ</span>
+        <span class="tag tag-cyan">AI-генерация контента</span>
+      </div>
+    </div>
+
+    <div class="rec-card" style="border-left:3px solid var(--accent-sage);">
+      <div class="rec-num" style="background:var(--green-dim);color:var(--green);">2</div>
+      <div class="rec-title">AI Video Pipeline для контент-фермы</div>
+      <div class="rec-desc">
+        525 видео/мес (5 аватаров x 3.5/день) — реальная цифра. Стек: TTS (ElevenLabs/Fish Audio) + AI b-roll (Gemini) + ffmpeg монтаж.
+        Для GameFi: короткие объяснения механик, обзоры дропов, анонсы партнёрств.
+        Для Game Platform: showcasing AI-генерированных игр, туториалы, UGC-стиль.
+      </div>
+      <div class="rec-tools">
+        <span class="tag tag-green">$5-135/мес в зависимости от качества</span>
+        <span class="tag tag-accent">6 стратегий на выбор</span>
+        <span class="tag tag-orange">60 сек вертикаль</span>
+      </div>
+    </div>
+
+    <div class="rec-card" style="border-left:3px solid var(--accent-teal);">
+      <div class="rec-num" style="background:var(--cyan-dim);color:var(--cyan);">3</div>
+      <div class="rec-title">Мультиагентная AI-система для маркетинга</div>
+      <div class="rec-desc">
+        6 AI-агентов (CEO-оркестратор, SMM, дизайнер, аналитик, продукт, разработка). Автономная генерация и публикация контента на 14 платформ.
+        Заменяет отсутствующего программиста — AI-агенты сами генерируют тексты, картинки, видео и публикуют по расписанию.
+        Встроенный quality gate: проверка перед публикацией.
+      </div>
+      <div class="rec-tools">
+        <span class="tag tag-accent">CrewAI / 6 агентов</span>
+        <span class="tag tag-green">14 платформ</span>
+        <span class="tag tag-cyan">Auto-schedule</span>
+      </div>
+    </div>
+
+    <div class="rec-card" style="border-left:3px solid var(--accent-gold);">
+      <div class="rec-num" style="background:var(--orange-dim);color:var(--orange);">4</div>
+      <div class="rec-title">Cold Outreach через Telegram-агентов</div>
+      <div class="rec-desc">
+        AI-агент для холодного outreach: парсинг целевых чатов/каналов → персонализированные сообщения → follow-up воронка.
+        Для Game Platform: outreach к indie-разработчикам и GameDev студиям.
+        Для ZarGates: outreach к Web2 gaming студиям и инвесторам.
+        <br><em style="color:var(--text-light);">Важно: соблюдение Telegram ToS, organic-стиль, не spam.</em>
+      </div>
+      <div class="rec-tools">
+        <span class="tag tag-orange">Telegram Bot API</span>
+        <span class="tag tag-accent">Персонализация через LLM</span>
+      </div>
+    </div>
+
+    <div class="rec-card" style="border-left:3px solid var(--accent-rose);">
+      <div class="rec-num" style="background:var(--pink-dim);color:var(--pink);">5</div>
+      <div class="rec-title">Контент для Web2 аудитории (новый продукт)</div>
+      <div class="rec-desc">
+        AI Game Content Platform продаётся фиатом, скрывая крипто. Значит контент-стратегия = чистый Web2:
+        YouTube (обзоры AI-игр), TikTok (gameplay clips), Reddit (r/indiegaming, r/gamedev), Discord (community).
+        Не нужно знание крипты — продукт позиционируется как "Create your own game with AI".
+      </div>
+      <div class="rec-tools">
+        <span class="tag tag-pink">Web2 каналы</span>
+        <span class="tag tag-accent">YouTube + TikTok + Reddit</span>
+        <span class="tag tag-green">Фиатная воронка</span>
+      </div>
+    </div>
+
+    <div class="rec-card" style="border-left:3px solid var(--accent-teal);">
+      <div class="rec-num" style="background:rgba(42,157,143,0.12);color:var(--accent-teal);">6</div>
+      <div class="rec-title">NFT Drop Marketing Automation</div>
+      <div class="rec-desc">
+        Free mints/дропы — ваш лучший канал (x15 рост). Автоматизируем: анонсы дропов → обратный отсчёт → запуск → post-drop analytics.
+        AI-агент автоматически генерирует тизеры, countdown-посты, результаты дропа — и публикует на все каналы параллельно.
+        Интеграция с Telegram Mini App для уведомлений о дропах.
+      </div>
+      <div class="rec-tools">
+        <span class="tag tag-accent">Event-driven automation</span>
+        <span class="tag tag-cyan">TG Mini App + Bot</span>
+      </div>
+    </div>
+
+    <div class="rec-card" style="border-left:3px solid var(--accent-sage);">
+      <div class="rec-num" style="background:var(--green-dim);color:var(--green);">7</div>
+      <div class="rec-title">Масштабирование PR Романа через AI-клон</div>
+      <div class="rec-desc">
+        Роман лично ведёт PR — это bottleneck. Решение: AI-клон голоса Романа (ElevenLabs, $22/мес) для подкастов, video-комментариев, аудио-приветствий в каналах.
+        Плюс AI-генерация LinkedIn/Twitter постов в стиле Романа. Он проверяет и публикует — экономия 80% времени на контент.
+      </div>
+      <div class="rec-tools">
+        <span class="tag tag-green">ElevenLabs voice clone</span>
+        <span class="tag tag-accent">Ghostwriting через LLM</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== 6. ЧТО МЫ ПРЕДЛАГАЕМ ===== -->
+<section>
+  <div class="section-label"><span class="num">06</span> Наше предложение</div>
+  <h2>Что Zinin Corp может сделать для ZarGates</h2>
+
+  <div class="card-grid fade-in">
+    <div class="card" style="border-top:3px solid var(--accent-warm);">
+      <h3 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin-bottom:12px;color:var(--text-dark);">AI Content Factory</h3>
+      <p style="font-size:13px;color:var(--text-mid);margin-bottom:12px;">
+        Развёртывание полной контент-фермы: 3 AI-блогера (по одному на продукт), автопостинг на 10+ платформ, видео-пайплайн, качественные тексты через LLM.
+      </p>
+      <div style="font-size:12px;color:var(--text-light);">Срок: 2-3 недели на MVP (текст). Видео: +1-2 недели.</div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--accent-sage);">
+      <h3 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin-bottom:12px;color:var(--text-dark);">Marketing AI Agent System</h3>
+      <p style="font-size:13px;color:var(--text-mid);margin-bottom:12px;">
+        Мультиагентная система: генерация контента, публикация, аналитика, A/B тесты, community management. Заменяет необходимость в маркетинг-программисте.
+      </p>
+      <div style="font-size:12px;color:var(--text-light);">Основа: наша система на CrewAI (4000+ тестов, 25 спринтов)</div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--accent-gold);">
+      <h3 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin-bottom:12px;color:var(--text-dark);">Telegram Bot & Mini App</h3>
+      <p style="font-size:13px;color:var(--text-mid);margin-bottom:12px;">
+        Telegram Mini App для маркетинг-воронки: onboarding новых пользователей, NFT drop notifications, gamified referral system. Интеграция с TON.
+      </p>
+      <div style="font-size:12px;color:var(--text-light);">Стек: aiogram + TMA + TON Connect</div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--accent-rose);">
+      <h3 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin-bottom:12px;color:var(--text-dark);">Growth Engine</h3>
+      <p style="font-size:13px;color:var(--text-mid);margin-bottom:12px;">
+        5 автономных петель: контент-маховик, SEO-фабрика, product-led marketing, Telegram-воронка, реферальная машина. Каждая петля работает автономно.
+      </p>
+      <div style="font-size:12px;color:var(--text-light);">Адаптируем под GameFi — гейминг-воронки вместо карьерных</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== 7. НАШ СТЕК ===== -->
+<section>
+  <div class="section-label"><span class="num">07</span> Наш стек</div>
+  <h2>AI-инфраструктура Zinin Corp</h2>
+
+  <div class="card fade-in">
+    <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:16px;color:var(--text-dark);">Мультиагентная система (production)</h3>
+    <div class="stack-row">
+      <div class="stack-item" style="border-color:var(--accent-warm);">
+        <div class="name" style="color:var(--accent-warm);">CEO Agent</div>
+        <div class="desc">NLU Router, оркестрация</div>
+      </div>
+      <div class="stack-item">
+        <div class="name">SMM Agent</div>
+        <div class="desc">Контент + 14 платформ</div>
+      </div>
+      <div class="stack-item">
+        <div class="name">Designer</div>
+        <div class="desc">11 design tools</div>
+      </div>
+      <div class="stack-item">
+        <div class="name">CPO Agent</div>
+        <div class="desc">Product dev loop</div>
+      </div>
+      <div class="stack-item">
+        <div class="name">CTO Agent</div>
+        <div class="desc">Code review, DevOps</div>
+      </div>
+      <div class="stack-item">
+        <div class="name">CFO Agent</div>
+        <div class="desc">Финансы, отчёты</div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:16px;color:var(--text-dark);">Публикация контента</h3>
+    <div class="stack-row">
+      <div class="stack-item"><div class="name">LinkedIn</div></div>
+      <div class="stack-item"><div class="name">Threads</div></div>
+      <div class="stack-item"><div class="name">Telegram</div></div>
+      <div class="stack-item"><div class="name">Facebook</div></div>
+      <div class="stack-item"><div class="name">VK</div></div>
+      <div class="stack-item"><div class="name">YouTube</div></div>
+      <div class="stack-item"><div class="name">Bluesky</div></div>
+      <div class="stack-item"><div class="name">Mastodon</div></div>
+      <div class="stack-item"><div class="name">Dev.to</div></div>
+      <div class="stack-item"><div class="name">X/Twitter</div></div>
+    </div>
+
+    <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:16px;color:var(--text-dark);">Видео-пайплайн</h3>
+    <div class="stack-row">
+      <div class="stack-item">
+        <div class="name">TTS</div>
+        <div class="desc">ElevenLabs, Fish Audio, Qwen3-TTS, edge-tts</div>
+      </div>
+      <div class="stack-item">
+        <div class="name">Lip Sync</div>
+        <div class="desc">EchoMimicV3, Hallo3, SadTalker, MuseTalk</div>
+      </div>
+      <div class="stack-item">
+        <div class="name">B-Roll</div>
+        <div class="desc">Gemini AI (500/день бесплатно)</div>
+      </div>
+      <div class="stack-item">
+        <div class="name">Монтаж</div>
+        <div class="desc">ffmpeg, Remotion, Manim</div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:16px;color:var(--text-dark);">Инфра</h3>
+    <div class="stack-row">
+      <div class="stack-item"><div class="name">RUVDS VPS</div><div class="desc">Docker Compose</div></div>
+      <div class="stack-item"><div class="name">Vast.ai GPU</div><div class="desc">RTX A5000/4090</div></div>
+      <div class="stack-item"><div class="name">CrewAI</div><div class="desc">Agent framework</div></div>
+      <div class="stack-item"><div class="name">Claude Code</div><div class="desc">AI DevOps</div></div>
+      <div class="stack-item"><div class="name">Groq/OpenRouter</div><div class="desc">Free LLM inference</div></div>
+    </div>
+  </div>
+
+  <div class="card fade-in" style="background:linear-gradient(135deg, rgba(232,115,74,0.06), rgba(42,157,143,0.04));">
+    <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:8px;color:var(--text-dark);">Цифры</h3>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;text-align:center;">
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--accent-warm);">4029</div>
+        <div style="font-size:11px;color:var(--text-light);text-transform:uppercase;letter-spacing:1px;">тестов пройдено</div>
+      </div>
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--accent-sage);">25</div>
+        <div style="font-size:11px;color:var(--text-light);text-transform:uppercase;letter-spacing:1px;">спринтов</div>
+      </div>
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--accent-teal);">14</div>
+        <div style="font-size:11px;color:var(--text-light);text-transform:uppercase;letter-spacing:1px;">платформ</div>
+      </div>
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--accent-gold);">6</div>
+        <div style="font-size:11px;color:var(--text-light);text-transform:uppercase;letter-spacing:1px;">AI-агентов</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== 8. КЕЙСЫ ===== -->
+<section>
+  <div class="section-label"><span class="num">08</span> Кейсы</div>
+  <h2>Что мы уже делали</h2>
+
+  <div class="card-grid fade-in">
+    <div class="case-card" style="border-top:3px solid var(--accent-warm);">
+      <div class="case-badge" style="color:var(--accent-warm);">AI Corporation</div>
+      <div class="case-title">Мультиагентная маркетинг-система</div>
+      <div class="case-desc">6 AI-агентов, автопубликация контента на 14 платформ, auto-schedule, quality gates, product dev loop с HITL approval.</div>
+      <div class="case-metrics">
+        <div class="case-metric"><strong>4029</strong> тестов</div>
+        <div class="case-metric"><strong>25</strong> спринтов</div>
+        <div class="case-metric"><strong>14</strong> платформ</div>
+      </div>
+    </div>
+    <div class="case-card" style="border-top:3px solid var(--accent-sage);">
+      <div class="case-badge" style="color:var(--accent-sage);">AI Blogger</div>
+      <div class="case-title">Виртуальный блогер Лиза Соловьёва</div>
+      <div class="case-desc">AI-персонаж с кастомным голосом, видео, автопостинг в TG/LinkedIn/VK/YouTube Shorts. 35-шаговый deployment playbook.</div>
+      <div class="case-metrics">
+        <div class="case-metric"><strong>5+</strong> платформ</div>
+        <div class="case-metric"><strong>$0.50</strong>/мес</div>
+        <div class="case-metric"><strong>3-4</strong> видео/день</div>
+      </div>
+    </div>
+    <div class="case-card" style="border-top:3px solid var(--accent-gold);">
+      <div class="case-badge" style="color:var(--accent-gold);">КРМКТЛ</div>
+      <div class="case-title">Крипто Маркетологи — TG бот + TMA</div>
+      <div class="case-desc">Каталог 7 вендоров (крипто-инструменты), Telegram Mini App, CRM, deep links, spotlight posts. B2B SaaS для крипто-маркетологов.</div>
+      <div class="case-metrics">
+        <div class="case-metric"><strong>7</strong> вендоров</div>
+        <div class="case-metric"><strong>$350</strong> MRR</div>
+        <div class="case-metric"><strong>161</strong> тест</div>
+      </div>
+    </div>
+    <div class="case-card" style="border-top:3px solid var(--accent-rose);">
+      <div class="case-badge" style="color:var(--accent-rose);">СБОРКА</div>
+      <div class="case-title">Карьерный клуб — бот + подкаст + воронка</div>
+      <div class="case-desc">Telegram бот, AI-подкаст (ElevenLabs TTS, авто-дистрибуция на 7 площадок), вебинарная воронка, SMM-бот для контент-плана.</div>
+      <div class="case-metrics">
+        <div class="case-metric"><strong>4</strong> эпизода</div>
+        <div class="case-metric"><strong>7</strong> площадок</div>
+        <div class="case-metric"><strong>AI TTS</strong></div>
+      </div>
+    </div>
+    <div class="case-card" style="border-top:3px solid var(--accent-teal);">
+      <div class="case-badge" style="color:var(--accent-teal);">Frozen Nail</div>
+      <div class="case-title">Обучающая платформа в Telegram</div>
+      <div class="case-desc">Telegram Mini App для обучения мастеров маникюра. 5 уроков, 40 карточек, 29 AI-картинок, брендированный UI.</div>
+      <div class="case-metrics">
+        <div class="case-metric"><strong>TMA</strong></div>
+        <div class="case-metric"><strong>40</strong> карточек</div>
+        <div class="case-metric"><strong>FastAPI</strong></div>
+      </div>
+    </div>
+    <div class="case-card" style="border-top:3px solid var(--accent-coral);">
+      <div class="case-badge" style="color:var(--accent-coral);">Research</div>
+      <div class="case-title">Deep Research база знаний</div>
+      <div class="case-desc">55 соцсетей с API, 6 видео-стратегий, все TTS модели, lip sync + avatar generation, SEO-программатик. Всё задокументировано.</div>
+      <div class="case-metrics">
+        <div class="case-metric"><strong>55</strong> соцсетей</div>
+        <div class="case-metric"><strong>6</strong> стратегий</div>
+        <div class="case-metric"><strong>10+</strong> TTS моделей</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== 9. TALKING POINTS ===== -->
+<section>
+  <div class="section-label"><span class="num">09</span> Talking Points</div>
+  <h2>Ключевые тезисы для разговора</h2>
+
+  <div class="card fade-in">
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <div style="background:var(--accent-dim);color:var(--accent-warm);border-radius:8px;padding:4px 10px;font-size:12px;font-weight:700;flex-shrink:0;letter-spacing:0.5px;">OPEN</div>
+        <div style="font-size:14px;color:var(--text-mid);">
+          <strong style="color:var(--text-dark);">"Рассказал бы подробнее — как конкретно работают инфлюенсеры? Сколько платите, какой CAC, какой LTV?"</strong>
+          <div style="font-size:12px;color:var(--text-light);margin-top:4px;">Понять unit economics текущего маркетинга</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <div style="background:var(--green-dim);color:var(--green);border-radius:8px;padding:4px 10px;font-size:12px;font-weight:700;flex-shrink:0;letter-spacing:0.5px;">SHOW</div>
+        <div style="font-size:14px;color:var(--text-mid);">
+          <strong style="color:var(--text-dark);">Показать AI-блогера Лизу: Telegram канал + YouTube Shorts</strong>
+          <div style="font-size:12px;color:var(--text-light);margin-top:4px;">Конкретный кейс: виртуальный персонаж автоматически публикует на 5 платформ</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <div style="background:var(--orange-dim);color:var(--orange);border-radius:8px;padding:4px 10px;font-size:12px;font-weight:700;flex-shrink:0;letter-spacing:0.5px;">PITCH</div>
+        <div style="font-size:14px;color:var(--text-mid);">
+          <strong style="color:var(--text-dark);">"У нас есть 35-шаговый playbook деплоя AI-блогера. Мы его прогнали на СБОРКЕ — и он работает. Можем адаптировать под ZarGates за 2-3 недели."</strong>
+          <div style="font-size:12px;color:var(--text-light);margin-top:4px;">Конкретика: не "мы можем", а "мы уже сделали и вот playbook"</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <div style="background:var(--cyan-dim);color:var(--cyan);border-radius:8px;padding:4px 10px;font-size:12px;font-weight:700;flex-shrink:0;letter-spacing:0.5px;">HOOK</div>
+        <div style="font-size:14px;color:var(--text-mid);">
+          <strong style="color:var(--text-dark);">"AI Game Content Platform + AI-generated marketing — полный AI-stack. Мы можем не только контент делать, но и автоматически продвигать игры, которые ваша платформа генерирует."</strong>
+          <div style="font-size:12px;color:var(--text-light);margin-top:4px;">Связать их продукт с нашими capabilities — AI создаёт игры И маркетинг для них</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <div style="background:var(--pink-dim);color:var(--pink);border-radius:8px;padding:4px 10px;font-size:12px;font-weight:700;flex-shrink:0;letter-spacing:0.5px;">UPSELL</div>
+        <div style="font-size:14px;color:var(--text-mid);">
+          <strong style="color:var(--text-dark);">"Voice clone Романа для подкастов и видео-контента — расширяем ваш PR без вашего времени"</strong>
+          <div style="font-size:12px;color:var(--text-light);margin-top:4px;">Решаем конкретную боль: PR через одного человека не масштабируется</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <div style="background:var(--red-dim);color:var(--red);border-radius:8px;padding:4px 10px;font-size:12px;font-weight:700;flex-shrink:0;letter-spacing:0.5px;">AVOID</div>
+        <div style="font-size:14px;color:var(--text-mid);">
+          <strong style="color:var(--text-dark);">Не обещать волшебных результатов от платной рекламы — они сами говорят, что не работает</strong>
+          <div style="font-size:12px;color:var(--text-light);margin-top:4px;">Фокус на organic + community + AI automation, не на paid ads</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <p>Подготовлено Zinin Corp AI &middot; 23 февраля 2026</p>
+  <p style="margin-top:4px;opacity:.6;">Конфиденциально. Только для внутреннего использования.</p>
+</footer>
+
+</div>
+
+<script>
+// Scroll-triggered fade-in animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
