@@ -1,0 +1,1827 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLI-Агенты для Кодинга — Zinin Corporation</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FDF6EC;
+  --bg-card: #FFFAF2;
+  --bg-dark: #2D2520;
+  --accent-warm: #E8734A;
+  --accent-gold: #D4A843;
+  --accent-teal: #2A9D8F;
+  --accent-coral: #E76F51;
+  --accent-rose: #C4556E;
+  --accent-sage: #6B8F71;
+  --text-dark: #3D3229;
+  --text-mid: #6B5D52;
+  --text-light: #A8957F;
+  --border: rgba(61,50,41,0.08);
+  --shadow: 0 4px 24px rgba(45,37,32,0.06);
+  --shadow-lg: 0 12px 48px rgba(45,37,32,0.1);
+  --radius: 16px;
+  --radius-sm: 10px;
+
+  --green: #6B8F71;
+  --green-dim: rgba(107,143,113,0.12);
+  --orange: #D4A843;
+  --orange-dim: rgba(212,168,67,0.12);
+  --red: #C4556E;
+  --red-dim: rgba(196,85,110,0.12);
+  --cyan: #2A9D8F;
+  --cyan-dim: rgba(42,157,143,0.12);
+  --pink: #C4556E;
+  --pink-dim: rgba(196,85,110,0.12);
+  --accent-dim: rgba(232,115,74,0.1);
+
+  --purple: #8E44AD;
+  --purple-dim: rgba(142,68,173,0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--bg);
+  color: var(--text-dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== NAVIGATION ===== */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(253,246,236,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 8px;
+  padding: 12px 0;
+  overflow-x: auto;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-mid);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.nav-link:hover {
+  color: var(--accent-warm);
+  background: rgba(232,115,74,0.06);
+}
+
+.nav-link.active {
+  color: #fff;
+  background: var(--accent-warm);
+  border-color: var(--accent-warm);
+}
+
+/* ===== CONTAINER ===== */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 24px 60px;
+  overflow: hidden;
+  background: linear-gradient(160deg, #FDF6EC 0%, #F7E8D4 30%, #FDEBD0 60%, #FDF6EC 100%);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,115,74,0.12) 0%, transparent 70%);
+  animation: float1 18s ease-in-out infinite;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -150px; left: -150px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(42,157,143,0.1) 0%, transparent 70%);
+  animation: float2 22s ease-in-out infinite;
+}
+
+@keyframes float1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-40px,30px)} }
+@keyframes float2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(30px,-25px)} }
+
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 900px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border-radius: 100px;
+  background: rgba(232,115,74,0.1);
+  color: var(--accent-warm);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  animation: fadeDown .8s ease-out;
+}
+
+.hero-badge::before {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent-warm);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.3)} }
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--text-dark);
+  margin-bottom: 20px;
+  animation: fadeDown 1s ease-out .1s both;
+}
+
+.hero h1 span {
+  background: linear-gradient(135deg, var(--accent-warm), var(--accent-teal));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 20px;
+  color: var(--text-mid);
+  max-width: 700px;
+  margin: 0 auto 16px;
+  font-weight: 300;
+  animation: fadeDown 1s ease-out .2s both;
+}
+
+.hero-date {
+  font-size: 14px;
+  color: var(--text-light);
+  font-family: 'JetBrains Mono', monospace;
+  animation: fadeDown 1s ease-out .3s both;
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== SECTIONS ===== */
+section { padding: 80px 0; }
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+  margin-bottom: 16px;
+}
+
+.section-label::before {
+  content: '';
+  width: 32px; height: 2px;
+  background: var(--accent-warm);
+}
+
+.section-label .num {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  margin-bottom: 28px;
+  color: var(--text-dark);
+}
+
+/* ===== CARDS ===== */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 768px) { .card-grid { grid-template-columns: 1fr; } }
+
+/* ===== TOOL CARDS GRID ===== */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.tool-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.tool-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.tool-card .accent-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+
+.tool-card .tool-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.tool-card .tool-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.tool-card .tool-company {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.tool-card .tool-model {
+  font-size: 13px;
+  color: var(--text-mid);
+  margin-bottom: 12px;
+}
+
+.tool-card .tool-model strong {
+  color: var(--text-dark);
+}
+
+/* ===== PRICE TAG ===== */
+.price-tag {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+}
+
+.price-tag.free {
+  background: var(--accent-teal);
+}
+
+/* ===== TIER PILLS ===== */
+.tier-pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.tier-pill {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: rgba(61,50,41,0.04);
+  border: 1px solid var(--border);
+  color: var(--text-mid);
+}
+
+.tier-pill strong {
+  color: var(--text-dark);
+}
+
+/* ===== SWE BAR ===== */
+.swe-bar-container {
+  margin-top: 8px;
+}
+
+.swe-bar-label {
+  font-size: 11px;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.swe-bar-track {
+  width: 100%;
+  height: 20px;
+  border-radius: 10px;
+  background: rgba(61,50,41,0.06);
+  overflow: hidden;
+  position: relative;
+}
+
+.swe-bar-fill {
+  height: 100%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 8px;
+  transition: width 1s ease;
+}
+
+.swe-bar-fill span {
+  font-size: 12px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.no-data {
+  font-size: 12px;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+/* ===== DETAILS SECTION INSIDE CARD ===== */
+.tool-details {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--text-mid);
+}
+
+.tool-details .detail-row {
+  margin-bottom: 5px;
+}
+
+.detail-label {
+  color: var(--accent-teal);
+  font-weight: 600;
+}
+
+.detail-code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dark);
+  background: rgba(61,50,41,0.05);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.pros-cons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.pros-cons h4 {
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.pros-cons ul {
+  list-style: none;
+  font-size: 12px;
+  color: var(--text-mid);
+}
+
+.pros-cons ul li::before {
+  margin-right: 4px;
+}
+
+.pros-cons .pros h4 { color: var(--accent-teal); }
+.pros-cons .cons h4 { color: var(--accent-warm); }
+.pros-cons .pros li::before { content: '+ '; color: var(--accent-teal); font-weight: 700; }
+.pros-cons .cons li::before { content: '- '; color: var(--accent-warm); font-weight: 700; }
+
+/* ===== TIER DETAIL TABLE ===== */
+.tier-detail {
+  margin-top: 12px;
+}
+
+.tier-detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px;
+  background: rgba(61,50,41,0.03);
+  border-radius: 8px;
+  margin-bottom: 4px;
+  font-size: 13px;
+}
+
+.tier-detail-row .tier-name { font-weight: 700; color: var(--text-dark); min-width: 70px; }
+.tier-detail-row .tier-note { flex: 1; text-align: center; font-size: 12px; color: var(--text-light); }
+
+/* ===== BENCHMARK CHART ===== */
+.bench-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bench-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bench-rank {
+  width: 24px;
+  text-align: right;
+  font-size: 14px;
+  color: var(--text-light);
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.bench-name {
+  width: 150px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.bench-bar-track {
+  flex: 1;
+  height: 24px;
+  border-radius: 12px;
+  background: rgba(61,50,41,0.06);
+  overflow: hidden;
+}
+
+.bench-bar-fill {
+  height: 100%;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 10px;
+  transition: width 1.2s ease;
+}
+
+.bench-bar-fill span {
+  font-size: 12px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.bench-price {
+  width: 110px;
+  text-align: right;
+  font-size: 12px;
+  color: var(--text-light);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ===== INSIGHT BOX ===== */
+.insight-box {
+  margin-top: 20px;
+  padding: 16px 20px;
+  border-radius: var(--radius-sm);
+  border: 1px solid;
+}
+
+.insight-box .insight-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.insight-box p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-mid);
+}
+
+/* ===== OPUS COMPARISON GRID ===== */
+.opus-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.opus-cell {
+  padding: 12px 14px;
+  background: rgba(61,50,41,0.03);
+  border-radius: var(--radius-sm);
+}
+
+.opus-cell .metric-name {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.opus-cell .metric-values {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.opus-cell .diff-badge {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.diff-positive { background: rgba(42,157,143,0.15); color: var(--accent-teal); }
+.diff-negative { background: rgba(232,115,74,0.15); color: var(--accent-warm); }
+
+/* ===== COMPARISON TABLE ===== */
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.comparison-table thead th {
+  padding: 10px 8px;
+  text-align: left;
+  color: var(--text-light);
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  border-bottom: 2px solid var(--border);
+}
+
+.comparison-table tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+
+.comparison-table tbody tr:hover {
+  background: rgba(232,115,74,0.03);
+}
+
+.comparison-table td {
+  padding: 10px 8px;
+}
+
+.comparison-table .tool-cell {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.check { color: var(--accent-teal); }
+.cross { color: var(--text-light); }
+
+/* ===== SCATTER CHART ===== */
+.scatter-container {
+  position: relative;
+  height: 360px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  padding: 20px 20px 40px 50px;
+  background: rgba(61,50,41,0.02);
+}
+
+.scatter-y-label {
+  position: absolute;
+  left: 6px;
+  font-size: 11px;
+  color: var(--text-light);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.scatter-grid-line {
+  position: absolute;
+  left: 45px;
+  right: 10px;
+  height: 1px;
+  background: var(--border);
+}
+
+.scatter-x-label {
+  position: absolute;
+  bottom: 8px;
+  font-size: 11px;
+  color: var(--text-light);
+  font-family: 'JetBrains Mono', monospace;
+  transform: translateX(-50%);
+}
+
+.scatter-point {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 2;
+}
+
+.scatter-dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 0 auto 4px;
+  border: 2px solid rgba(255,255,255,0.6);
+  box-shadow: 0 0 14px rgba(0,0,0,0.08);
+}
+
+.scatter-dot-label {
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.scatter-hint {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+/* ===== VERDICT STACKS ===== */
+.verdict-stack {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.verdict-stack:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.verdict-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.verdict-header h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.verdict-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.verdict-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.verdict-item:last-of-type {
+  border-bottom: none;
+}
+
+.verdict-item .v-tool { font-weight: 700; }
+.verdict-item .v-note { flex: 1; text-align: center; font-size: 12px; color: var(--text-light); padding: 0 12px; }
+
+.verdict-total {
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* ===== KEY ANSWER ===== */
+.key-answer {
+  background: var(--bg-card);
+  border: 1px solid rgba(142,68,173,0.2);
+  border-left: 4px solid #8E44AD;
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+
+.key-answer h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #8E44AD;
+  margin-bottom: 16px;
+}
+
+.key-answer p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-mid);
+  margin-bottom: 12px;
+}
+
+.key-answer p:last-child { margin-bottom: 0; }
+
+/* ===== WARNING BOX ===== */
+.warning-box {
+  background: var(--bg-card);
+  border: 1px solid rgba(232,115,74,0.2);
+  border-left: 4px solid var(--accent-warm);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.warning-box .warn-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--accent-warm);
+  margin-bottom: 12px;
+}
+
+.warning-box p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-mid);
+  margin-bottom: 8px;
+}
+
+.warning-box p:last-child { margin-bottom: 0; }
+.warning-box strong { color: var(--text-dark); }
+
+/* ===== DIVIDER ===== */
+.divider { height: 1px; background: var(--border); margin: 0; }
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center; padding: 48px 24px;
+  font-size: 12px; color: var(--text-light);
+  border-top: 1px solid var(--border);
+}
+
+/* ===== ANIMATION ON SCROLL ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s ease-out, transform .7s ease-out;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .hero { min-height: auto; padding: 60px 24px 40px; }
+  section { padding: 48px 0; }
+  .tools-grid { grid-template-columns: 1fr; }
+  .opus-grid { grid-template-columns: 1fr; }
+  .bench-name { width: 110px; font-size: 12px; }
+  .bench-price { width: 80px; font-size: 11px; }
+  .pros-cons { grid-template-columns: 1fr; }
+  .comparison-table { font-size: 11px; }
+  .scatter-container { height: 320px; }
+}
+
+@media (max-width: 480px) {
+  .nav-inner { gap: 4px; }
+  .nav-link { font-size: 12px; padding: 6px 12px; }
+  .bench-name { width: 90px; }
+  .bench-price { display: none; }
+  .verdict-header { flex-direction: column; gap: 4px; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="meeting_prep_romanpov.html" class="nav-link">Подготовка к встрече</a>
+    <a href="meeting_prep_video_factory.html" class="nav-link">AI Video Factory</a>
+    <a href="meeting_prep_traffic_schemes.html" class="nav-link">Схемы трафика</a>
+    <a href="meeting_prep_llm_tools.html" class="nav-link active">CLI-Агенты</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Исследование Zinin Corporation</div>
+    <h1><span>CLI-Агенты</span> для Кодинга</h1>
+    <p class="hero-sub">Только подписки &middot; Бенчмарки &middot; Opus 4.6 vs Мир</p>
+    <p class="hero-date">Февраль 2026 &middot; Подготовил: Zinin Corp AI</p>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- ===== 1. ОБЗОР ЦЕН ===== -->
+<section>
+  <div class="section-label"><span class="num">01</span> Обзор цен</div>
+  <h2>8 CLI-инструментов и их тарифы</h2>
+
+  <div class="tools-grid fade-in">
+
+    <!-- Claude Code -->
+    <div class="tool-card">
+      <div class="accent-bar" style="background:linear-gradient(90deg, #E85D4A, transparent);"></div>
+      <div class="tool-header">
+        <div>
+          <div class="tool-name" style="color:#E85D4A;">&#x1F1FA;&#x1F1F8; Claude Code</div>
+          <div class="tool-company">Anthropic</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:10px;color:var(--text-light);letter-spacing:1px;">от</div>
+          <span class="price-tag" style="background:#E85D4A;">$20/мес</span>
+        </div>
+      </div>
+      <div class="tool-model">Модель: <strong>Opus 4.6 / Sonnet 4.6</strong></div>
+      <div class="tier-pills">
+        <span class="tier-pill"><strong>Pro</strong>: $20</span>
+        <span class="tier-pill"><strong>Max 5x</strong>: $100</span>
+        <span class="tier-pill"><strong>Max 20x</strong>: $200</span>
+      </div>
+      <div class="swe-bar-container">
+        <div class="swe-bar-label">SWE-bench Verified</div>
+        <div class="swe-bar-track">
+          <div class="swe-bar-fill" style="width:98.5%;background:linear-gradient(90deg, #E85D4A88, #E85D4A);">
+            <span>80.8%</span>
+          </div>
+        </div>
+      </div>
+      <div class="tool-details">
+        <div class="detail-row"><span class="detail-label">CLI:</span> <code class="detail-code">claude</code></div>
+        <div class="detail-row"><span class="detail-label">Контекст:</span> 1M &beta;</div>
+        <div class="detail-row"><span class="detail-label">Terminal-Bench:</span> 65.4%</div>
+        <div class="pros-cons">
+          <div class="pros">
+            <h4>Плюсы</h4>
+            <ul><li>Лучший reasoning</li><li>Agent Teams</li><li>1M контекст</li></ul>
+          </div>
+          <div class="cons">
+            <h4>Минусы</h4>
+            <ul><li>Дорого</li><li>Только модели Anthropic</li></ul>
+          </div>
+        </div>
+        <div class="tier-detail" style="margin-top:14px;">
+          <div class="swe-bar-label">Подробные тарифы</div>
+          <div class="tier-detail-row">
+            <span class="tier-name">Pro</span>
+            <span class="tier-note">Sonnet, 10-40 промптов/5ч</span>
+            <span class="price-tag" style="background:#E85D4A;font-size:12px;">$20/мес</span>
+          </div>
+          <div class="tier-detail-row">
+            <span class="tier-name">Max 5x</span>
+            <span class="tier-note">Opus 4.6, 5x лимиты</span>
+            <span class="price-tag" style="background:#E85D4A;font-size:12px;">$100/мес</span>
+          </div>
+          <div class="tier-detail-row">
+            <span class="tier-name">Max 20x</span>
+            <span class="tier-note">Opus 4.6, 20x лимиты</span>
+            <span class="price-tag" style="background:#E85D4A;font-size:12px;">$200/мес</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gemini CLI -->
+    <div class="tool-card">
+      <div class="accent-bar" style="background:linear-gradient(90deg, #2D8E6E, transparent);"></div>
+      <div class="tool-header">
+        <div>
+          <div class="tool-name" style="color:#2D8E6E;">&#x1F1FA;&#x1F1F8; Gemini CLI</div>
+          <div class="tool-company">Google</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:10px;color:var(--text-light);letter-spacing:1px;">от</div>
+          <span class="price-tag free">БЕСПЛАТНО</span>
+        </div>
+      </div>
+      <div class="tool-model">Модель: <strong>Gemini 3.1 Pro</strong></div>
+      <div class="tier-pills">
+        <span class="tier-pill"><strong>Free</strong>: $0</span>
+        <span class="tier-pill"><strong>AI Pro</strong>: $20</span>
+        <span class="tier-pill"><strong>AI Ultra</strong>: $250</span>
+      </div>
+      <div class="swe-bar-container">
+        <div class="swe-bar-label">SWE-bench Verified</div>
+        <div class="swe-bar-track">
+          <div class="swe-bar-fill" style="width:92.9%;background:linear-gradient(90deg, #2D8E6E88, #2D8E6E);">
+            <span>76.2%</span>
+          </div>
+        </div>
+      </div>
+      <div class="tool-details">
+        <div class="detail-row"><span class="detail-label">CLI:</span> <code class="detail-code">gemini</code></div>
+        <div class="detail-row"><span class="detail-label">Контекст:</span> 2M</div>
+        <div class="detail-row"><span class="detail-label">Terminal-Bench:</span> 56.2%</div>
+        <div class="pros-cons">
+          <div class="pros">
+            <h4>Плюсы</h4>
+            <ul><li>Бесплатный тир!</li><li>2M контекст</li><li>Open source</li></ul>
+          </div>
+          <div class="cons">
+            <h4>Минусы</h4>
+            <ul><li>Слабее в coding</li><li>Нет Agent Teams</li></ul>
+          </div>
+        </div>
+        <div class="tier-detail" style="margin-top:14px;">
+          <div class="swe-bar-label">Подробные тарифы</div>
+          <div class="tier-detail-row">
+            <span class="tier-name">Free</span>
+            <span class="tier-note">1000 запр/день, Gemini 2.5 Pro</span>
+            <span class="price-tag free" style="font-size:12px;">БЕСПЛАТНО</span>
+          </div>
+          <div class="tier-detail-row">
+            <span class="tier-name">AI Pro</span>
+            <span class="tier-note">Gemini 3 Pro, выше лимиты</span>
+            <span class="price-tag" style="background:#2D8E6E;font-size:12px;">$20/мес</span>
+          </div>
+          <div class="tier-detail-row">
+            <span class="tier-name">AI Ultra</span>
+            <span class="tier-note">Макс. лимиты, 3.1 Pro</span>
+            <span class="price-tag" style="background:#2D8E6E;font-size:12px;">$250/мес</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ChatGPT Codex -->
+    <div class="tool-card">
+      <div class="accent-bar" style="background:linear-gradient(90deg, #9B59B6, transparent);"></div>
+      <div class="tool-header">
+        <div>
+          <div class="tool-name" style="color:#9B59B6;">&#x1F1FA;&#x1F1F8; ChatGPT Codex</div>
+          <div class="tool-company">OpenAI</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:10px;color:var(--text-light);letter-spacing:1px;">от</div>
+          <span class="price-tag" style="background:#9B59B6;">$20/мес</span>
+        </div>
+      </div>
+      <div class="tool-model">Модель: <strong>GPT-5.3-Codex</strong></div>
+      <div class="tier-pills">
+        <span class="tier-pill"><strong>Plus</strong>: $20</span>
+        <span class="tier-pill"><strong>Pro</strong>: $200</span>
+      </div>
+      <div class="swe-bar-container">
+        <div class="swe-bar-label">SWE-bench Verified</div>
+        <div class="swe-bar-track">
+          <div class="swe-bar-fill" style="width:91.9%;background:linear-gradient(90deg, #9B59B688, #9B59B6);">
+            <span>75.4%</span>
+          </div>
+        </div>
+      </div>
+      <div class="tool-details">
+        <div class="detail-row"><span class="detail-label">CLI:</span> <code class="detail-code">codex</code></div>
+        <div class="detail-row"><span class="detail-label">Контекст:</span> 400K</div>
+        <div class="detail-row"><span class="detail-label">Terminal-Bench:</span> 77.3%</div>
+        <div class="pros-cons">
+          <div class="pros">
+            <h4>Плюсы</h4>
+            <ul><li>Лучший Terminal-Bench</li><li>Cloud execution</li><li>Async задачи</li></ul>
+          </div>
+          <div class="cons">
+            <h4>Минусы</h4>
+            <ul><li>Дорого</li><li>CLI ограничен</li></ul>
+          </div>
+        </div>
+        <div class="tier-detail" style="margin-top:14px;">
+          <div class="swe-bar-label">Подробные тарифы</div>
+          <div class="tier-detail-row">
+            <span class="tier-name">Plus</span>
+            <span class="tier-note">30-150 сообщ/5ч</span>
+            <span class="price-tag" style="background:#9B59B6;font-size:12px;">$20/мес</span>
+          </div>
+          <div class="tier-detail-row">
+            <span class="tier-name">Pro</span>
+            <span class="tier-note">300-1500 сообщ, cloud exec</span>
+            <span class="price-tag" style="background:#9B59B6;font-size:12px;">$200/мес</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GLM Coding Plan -->
+    <div class="tool-card">
+      <div class="accent-bar" style="background:linear-gradient(90deg, #D4A017, transparent);"></div>
+      <div class="tool-header">
+        <div>
+          <div class="tool-name" style="color:#D4A017;">&#x1F1E8;&#x1F1F3; GLM Coding Plan</div>
+          <div class="tool-company">Zhipu AI (Z.ai)</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:10px;color:var(--text-light);letter-spacing:1px;">от</div>
+          <span class="price-tag" style="background:#D4A017;">$6/мес</span>
+        </div>
+      </div>
+      <div class="tool-model">Модель: <strong>GLM-5 / GLM-4.7</strong></div>
+      <div class="tier-pills">
+        <span class="tier-pill"><strong>Lite</strong>: $6</span>
+        <span class="tier-pill"><strong>Pro</strong>: $15</span>
+        <span class="tier-pill"><strong>Max</strong>: $40</span>
+      </div>
+      <div class="swe-bar-container">
+        <div class="swe-bar-label">SWE-bench Verified</div>
+        <div class="swe-bar-track">
+          <div class="swe-bar-fill" style="width:94.9%;background:linear-gradient(90deg, #D4A01788, #D4A017);">
+            <span>77.8%</span>
+          </div>
+        </div>
+      </div>
+      <div class="tool-details">
+        <div class="detail-row"><span class="detail-label">CLI:</span> <code class="detail-code">Claude Code / Cline / OpenCode</code></div>
+        <div class="detail-row"><span class="detail-label">Контекст:</span> 200K</div>
+        <div class="pros-cons">
+          <div class="pros">
+            <h4>Плюсы</h4>
+            <ul><li>Дёшево!</li><li>MIT лицензия</li><li>Работает в Claude Code</li></ul>
+          </div>
+          <div class="cons">
+            <h4>Минусы</h4>
+            <ul><li>Throttling в пиках</li><li>Нет своего CLI</li></ul>
+          </div>
+        </div>
+        <div class="tier-detail" style="margin-top:14px;">
+          <div class="swe-bar-label">Подробные тарифы</div>
+          <div class="tier-detail-row">
+            <span class="tier-name">Lite</span>
+            <span class="tier-note">~120 промптов/5ч, GLM-4.7</span>
+            <span class="price-tag" style="background:#D4A017;font-size:12px;">$6/мес</span>
+          </div>
+          <div class="tier-detail-row">
+            <span class="tier-name">Pro</span>
+            <span class="tier-note">~600 промптов/5ч, GLM-5</span>
+            <span class="price-tag" style="background:#D4A017;font-size:12px;">$15/мес</span>
+          </div>
+          <div class="tier-detail-row">
+            <span class="tier-name">Max</span>
+            <span class="tier-note">Макс. лимиты, GLM-5</span>
+            <span class="price-tag" style="background:#D4A017;font-size:12px;">$40/мес</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alibaba Coding Plan -->
+    <div class="tool-card">
+      <div class="accent-bar" style="background:linear-gradient(90deg, #C44569, transparent);"></div>
+      <div class="tool-header">
+        <div>
+          <div class="tool-name" style="color:#C44569;">&#x1F1E8;&#x1F1F3; Alibaba Coding Plan</div>
+          <div class="tool-company">Alibaba Cloud</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:10px;color:var(--text-light);letter-spacing:1px;">от</div>
+          <span class="price-tag" style="background:#C44569;">$10/мес</span>
+        </div>
+      </div>
+      <div class="tool-model">Модель: <strong>Qwen3.5-Plus / Qwen3-Coder</strong></div>
+      <div class="tier-pills">
+        <span class="tier-pill"><strong>Lite</strong>: $10</span>
+        <span class="tier-pill"><strong>Pro</strong>: $50</span>
+      </div>
+      <div class="swe-bar-container">
+        <div class="swe-bar-label">SWE-bench Verified</div>
+        <div class="swe-bar-track">
+          <div class="swe-bar-fill" style="width:86.1%;background:linear-gradient(90deg, #C4456988, #C44569);">
+            <span>70.6%</span>
+          </div>
+        </div>
+      </div>
+      <div class="tool-details">
+        <div class="detail-row"><span class="detail-label">CLI:</span> <code class="detail-code">Qwen Code / Claude Code / Cline</code></div>
+        <div class="detail-row"><span class="detail-label">Контекст:</span> 256K</div>
+        <div class="pros-cons">
+          <div class="pros">
+            <h4>Плюсы</h4>
+            <ul><li>90K запр/мес!</li><li>201 язык</li><li>Qwen Code CLI</li></ul>
+          </div>
+          <div class="cons">
+            <h4>Минусы</h4>
+            <ul><li>Слабее бенчмарки</li><li>Сложная настройка</li></ul>
+          </div>
+        </div>
+        <div class="tier-detail" style="margin-top:14px;">
+          <div class="swe-bar-label">Подробные тарифы</div>
+          <div class="tier-detail-row">
+            <span class="tier-name">Lite</span>
+            <span class="tier-note">18K запр/мес</span>
+            <span class="price-tag" style="background:#C44569;font-size:12px;">$10/мес</span>
+          </div>
+          <div class="tier-detail-row">
+            <span class="tier-name">Pro</span>
+            <span class="tier-note">90K запр/мес</span>
+            <span class="price-tag" style="background:#C44569;font-size:12px;">$50/мес</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MiniMax Coding Plan -->
+    <div class="tool-card">
+      <div class="accent-bar" style="background:linear-gradient(90deg, #8E44AD, transparent);"></div>
+      <div class="tool-header">
+        <div>
+          <div class="tool-name" style="color:#8E44AD;">&#x1F1E8;&#x1F1F3; MiniMax Coding Plan</div>
+          <div class="tool-company">MiniMax</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:10px;color:var(--text-light);letter-spacing:1px;">от</div>
+          <span class="price-tag" style="background:#8E44AD;">$10/мес</span>
+        </div>
+      </div>
+      <div class="tool-model">Модель: <strong>MiniMax M2.5</strong></div>
+      <div class="tier-pills">
+        <span class="tier-pill"><strong>Starter</strong>: $10</span>
+        <span class="tier-pill"><strong>Plus</strong>: $20</span>
+        <span class="tier-pill"><strong>Max</strong>: $50</span>
+      </div>
+      <div class="swe-bar-container">
+        <div class="swe-bar-label">SWE-bench Verified</div>
+        <div class="swe-bar-track">
+          <div class="swe-bar-fill" style="width:97.8%;background:linear-gradient(90deg, #8E44AD88, #8E44AD);">
+            <span>80.2%</span>
+          </div>
+        </div>
+      </div>
+      <div class="tool-details">
+        <div class="detail-row"><span class="detail-label">CLI:</span> <code class="detail-code">Cline / OpenCode</code></div>
+        <div class="detail-row"><span class="detail-label">Контекст:</span> 205K</div>
+        <div class="pros-cons">
+          <div class="pros">
+            <h4>Плюсы</h4>
+            <ul><li>80.2% SWE &mdash; почти Opus!</li><li>100 TPS Lightning</li><li>Open weights</li></ul>
+          </div>
+          <div class="cons">
+            <h4>Минусы</h4>
+            <ul><li>Молодая платформа</li><li>Throttling риски</li></ul>
+          </div>
+        </div>
+        <div class="tier-detail" style="margin-top:14px;">
+          <div class="swe-bar-label">Подробные тарифы</div>
+          <div class="tier-detail-row">
+            <span class="tier-name">Starter</span>
+            <span class="tier-note">&#8776; Claude Max 5x</span>
+            <span class="price-tag" style="background:#8E44AD;font-size:12px;">$10/мес</span>
+          </div>
+          <div class="tier-detail-row">
+            <span class="tier-name">Plus</span>
+            <span class="tier-note">&#8776; Claude Max 20x</span>
+            <span class="price-tag" style="background:#8E44AD;font-size:12px;">$20/мес</span>
+          </div>
+          <div class="tier-detail-row">
+            <span class="tier-name">Max</span>
+            <span class="tier-note">&#8776; Claude Max 20x+</span>
+            <span class="price-tag" style="background:#8E44AD;font-size:12px;">$50/мес</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kimi Membership -->
+    <div class="tool-card">
+      <div class="accent-bar" style="background:linear-gradient(90deg, #E67E22, transparent);"></div>
+      <div class="tool-header">
+        <div>
+          <div class="tool-name" style="color:#E67E22;">&#x1F1E8;&#x1F1F3; Kimi Membership</div>
+          <div class="tool-company">Moonshot AI</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:10px;color:var(--text-light);letter-spacing:1px;">от</div>
+          <span class="price-tag free">БЕСПЛАТНО</span>
+        </div>
+      </div>
+      <div class="tool-model">Модель: <strong>Kimi K2.5</strong></div>
+      <div class="tier-pills">
+        <span class="tier-pill"><strong>Free</strong>: $0</span>
+        <span class="tier-pill"><strong>Moderato</strong>: $19</span>
+      </div>
+      <div class="swe-bar-container">
+        <div class="swe-bar-label">SWE-bench Verified</div>
+        <div class="no-data">нет данных</div>
+      </div>
+      <div class="tool-details">
+        <div class="detail-row"><span class="detail-label">CLI:</span> <code class="detail-code">Cline / Kilo Code</code></div>
+        <div class="detail-row"><span class="detail-label">Контекст:</span> 256K</div>
+        <div class="pros-cons">
+          <div class="pros">
+            <h4>Плюсы</h4>
+            <ul><li>Бесплатный тир</li><li>256K контекст</li><li>Agent Swarm</li></ul>
+          </div>
+          <div class="cons">
+            <h4>Минусы</h4>
+            <ul><li>Нет SWE-bench данных</li><li>Еженедельные квоты</li></ul>
+          </div>
+        </div>
+        <div class="tier-detail" style="margin-top:14px;">
+          <div class="swe-bar-label">Подробные тарифы</div>
+          <div class="tier-detail-row">
+            <span class="tier-name">Free</span>
+            <span class="tier-note">Базовый доступ</span>
+            <span class="price-tag free" style="font-size:12px;">БЕСПЛАТНО</span>
+          </div>
+          <div class="tier-detail-row">
+            <span class="tier-name">Moderato</span>
+            <span class="tier-note">2-3.5K запр/неделю</span>
+            <span class="price-tag" style="background:#E67E22;font-size:12px;">$19/мес</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GitHub Copilot -->
+    <div class="tool-card">
+      <div class="accent-bar" style="background:linear-gradient(90deg, #1ABC9C, transparent);"></div>
+      <div class="tool-header">
+        <div>
+          <div class="tool-name" style="color:#1ABC9C;">&#x1F1FA;&#x1F1F8; GitHub Copilot</div>
+          <div class="tool-company">GitHub / Microsoft</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:10px;color:var(--text-light);letter-spacing:1px;">от</div>
+          <span class="price-tag" style="background:#1ABC9C;">$10/мес</span>
+        </div>
+      </div>
+      <div class="tool-model">Модель: <strong>Мульти-модель</strong></div>
+      <div class="tier-pills">
+        <span class="tier-pill"><strong>Pro</strong>: $10</span>
+        <span class="tier-pill"><strong>Pro+</strong>: $39</span>
+      </div>
+      <div class="swe-bar-container">
+        <div class="swe-bar-label">SWE-bench Verified</div>
+        <div class="no-data">нет данных</div>
+      </div>
+      <div class="tool-details">
+        <div class="detail-row"><span class="detail-label">CLI:</span> <code class="detail-code">gh copilot</code></div>
+        <div class="detail-row"><span class="detail-label">Контекст:</span> Varies</div>
+        <div class="pros-cons">
+          <div class="pros">
+            <h4>Плюсы</h4>
+            <ul><li>$10/мес!</li><li>Мульти-модель</li><li>GitHub интеграция</li></ul>
+          </div>
+          <div class="cons">
+            <h4>Минусы</h4>
+            <ul><li>Не полноценный агент</li><li>Огранич. premium запросы</li></ul>
+          </div>
+        </div>
+        <div class="tier-detail" style="margin-top:14px;">
+          <div class="swe-bar-label">Подробные тарифы</div>
+          <div class="tier-detail-row">
+            <span class="tier-name">Pro</span>
+            <span class="tier-note">300 premium запр + completion</span>
+            <span class="price-tag" style="background:#1ABC9C;font-size:12px;">$10/мес</span>
+          </div>
+          <div class="tier-detail-row">
+            <span class="tier-name">Pro+</span>
+            <span class="tier-note">Claude Opus 4.5 + GPT-5</span>
+            <span class="price-tag" style="background:#1ABC9C;font-size:12px;">$39/мес</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== 2. БЕНЧМАРКИ ===== -->
+<section>
+  <div class="section-label"><span class="num">02</span> Бенчмарки</div>
+  <h2>SWE-bench &amp; Terminal-Bench</h2>
+
+  <!-- SWE-bench -->
+  <div class="card fade-in">
+    <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:6px;color:#E85D4A;">SWE-bench Verified &mdash; решение реальных GitHub Issues</h3>
+    <p style="font-size:13px;color:var(--text-light);margin-bottom:20px;">Февраль 2026 &middot; Независимый лидерборд &middot; Стандартный промпт для всех моделей</p>
+
+    <div class="bench-chart">
+      <div class="bench-row">
+        <span class="bench-rank">1</span>
+        <span class="bench-name">Claude Sonnet 4.5</span>
+        <div class="bench-bar-track"><div class="bench-bar-fill" style="width:96.5%;background:linear-gradient(90deg,#E85D4A88,#E85D4A);"><span>82.0%</span></div></div>
+        <span class="bench-price">в Claude Code</span>
+      </div>
+      <div class="bench-row">
+        <span class="bench-rank">2</span>
+        <span class="bench-name">Claude Opus 4.6</span>
+        <div class="bench-bar-track"><div class="bench-bar-fill" style="width:95.1%;background:linear-gradient(90deg,#E85D4A88,#E85D4A);"><span>80.8%</span></div></div>
+        <span class="bench-price">$100-200/мес</span>
+      </div>
+      <div class="bench-row">
+        <span class="bench-rank">3</span>
+        <span class="bench-name">MiniMax M2.5</span>
+        <div class="bench-bar-track"><div class="bench-bar-fill" style="width:94.4%;background:linear-gradient(90deg,#8E44AD88,#8E44AD);"><span>80.2%</span></div></div>
+        <span class="bench-price">$10-50/мес</span>
+      </div>
+      <div class="bench-row">
+        <span class="bench-rank">4</span>
+        <span class="bench-name">Claude Sonnet 4.6</span>
+        <div class="bench-bar-track"><div class="bench-bar-fill" style="width:93.6%;background:linear-gradient(90deg,#E85D4A88,#E85D4A);"><span>79.6%</span></div></div>
+        <span class="bench-price">$20/мес</span>
+      </div>
+      <div class="bench-row">
+        <span class="bench-rank">5</span>
+        <span class="bench-name">GLM-5</span>
+        <div class="bench-bar-track"><div class="bench-bar-fill" style="width:91.5%;background:linear-gradient(90deg,#D4A01788,#D4A017);"><span>77.8%</span></div></div>
+        <span class="bench-price">$6-40/мес</span>
+      </div>
+      <div class="bench-row">
+        <span class="bench-rank">6</span>
+        <span class="bench-name">Gemini 3 Flash</span>
+        <div class="bench-bar-track"><div class="bench-bar-fill" style="width:89.6%;background:linear-gradient(90deg,#2D8E6E88,#2D8E6E);"><span>76.2%</span></div></div>
+        <span class="bench-price">$0-250/мес</span>
+      </div>
+      <div class="bench-row">
+        <span class="bench-rank">7</span>
+        <span class="bench-name">GPT-5.2</span>
+        <div class="bench-bar-track"><div class="bench-bar-fill" style="width:88.7%;background:linear-gradient(90deg,#9B59B688,#9B59B6);"><span>75.4%</span></div></div>
+        <span class="bench-price">$20-200/мес</span>
+      </div>
+      <div class="bench-row">
+        <span class="bench-rank">8</span>
+        <span class="bench-name">Qwen3-Coder</span>
+        <div class="bench-bar-track"><div class="bench-bar-fill" style="width:83.1%;background:linear-gradient(90deg,#C4456988,#C44569);"><span>70.6%</span></div></div>
+        <span class="bench-price">$10-50/мес</span>
+      </div>
+    </div>
+
+    <div class="insight-box" style="background:rgba(232,115,74,0.06);border-color:rgba(232,115,74,0.2);">
+      <div class="insight-title" style="color:#E85D4A;">Ключевой инсайт</div>
+      <p><strong style="color:#8E44AD;">MiniMax M2.5</strong> за <strong>$10-50/мес</strong> показывает 80.2% &mdash; всего на 0.6% ниже Opus 4.6 за $200/мес. <strong style="color:#D4A017;">GLM-5</strong> за $6-40/мес набирает 77.8%. Разрыв между &laquo;дешёвыми&raquo; и &laquo;премиальными&raquo; моделями сократился до минимума.</p>
+    </div>
+  </div>
+
+  <!-- Terminal-Bench -->
+  <div class="card fade-in">
+    <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:6px;color:#9B59B6;">Terminal-Bench 2.0 &mdash; работа в терминале</h3>
+    <p style="font-size:13px;color:var(--text-light);margin-bottom:20px;">Навигация по CLI, shell-команды, отладка</p>
+
+    <div class="bench-chart">
+      <div class="bench-row">
+        <span class="bench-rank">1</span>
+        <span class="bench-name">GPT-5.3 Codex</span>
+        <div class="bench-bar-track"><div class="bench-bar-fill" style="width:96.6%;background:linear-gradient(90deg,#9B59B688,#9B59B6);"><span>77.3%</span></div></div>
+        <span class="bench-price">$200/мес</span>
+      </div>
+      <div class="bench-row">
+        <span class="bench-rank">2</span>
+        <span class="bench-name">Claude Opus 4.6</span>
+        <div class="bench-bar-track"><div class="bench-bar-fill" style="width:81.8%;background:linear-gradient(90deg,#E85D4A88,#E85D4A);"><span>65.4%</span></div></div>
+        <span class="bench-price">$100-200/мес</span>
+      </div>
+      <div class="bench-row">
+        <span class="bench-rank">3</span>
+        <span class="bench-name">Claude Opus 4.5</span>
+        <div class="bench-bar-track"><div class="bench-bar-fill" style="width:74.8%;background:linear-gradient(90deg,#E85D4A88,#E85D4A);"><span>59.8%</span></div></div>
+        <span class="bench-price">&mdash;</span>
+      </div>
+      <div class="bench-row">
+        <span class="bench-rank">4</span>
+        <span class="bench-name">Claude Sonnet 4.6</span>
+        <div class="bench-bar-track"><div class="bench-bar-fill" style="width:73.9%;background:linear-gradient(90deg,#E85D4A88,#E85D4A);"><span>59.1%</span></div></div>
+        <span class="bench-price">$20/мес</span>
+      </div>
+      <div class="bench-row">
+        <span class="bench-rank">5</span>
+        <span class="bench-name">Gemini 3 Pro</span>
+        <div class="bench-bar-track"><div class="bench-bar-fill" style="width:70.3%;background:linear-gradient(90deg,#2D8E6E88,#2D8E6E);"><span>56.2%</span></div></div>
+        <span class="bench-price">$0-250/мес</span>
+      </div>
+      <div class="bench-row">
+        <span class="bench-rank">6</span>
+        <span class="bench-name">Claude Sonnet 4.5</span>
+        <div class="bench-bar-track"><div class="bench-bar-fill" style="width:63.8%;background:linear-gradient(90deg,#E85D4A88,#E85D4A);"><span>51.0%</span></div></div>
+        <span class="bench-price">&mdash;</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Opus 4.6 vs 4.5 -->
+  <div class="card fade-in">
+    <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:16px;color:#E85D4A;">Opus 4.6 vs Opus 4.5 &mdash; что изменилось?</h3>
+
+    <div class="opus-grid">
+      <div class="opus-cell">
+        <div class="metric-name">SWE-bench Verified</div>
+        <div class="metric-values">
+          <span>4.5: 80.9%</span>
+          <span style="font-weight:700;color:var(--accent-warm);">&rarr; 80.8%</span>
+          <span class="diff-badge diff-negative">&minus;0.1%</span>
+        </div>
+      </div>
+      <div class="opus-cell">
+        <div class="metric-name">Terminal-Bench 2.0</div>
+        <div class="metric-values">
+          <span>4.5: 59.8%</span>
+          <span style="font-weight:700;color:var(--accent-teal);">&rarr; 65.4%</span>
+          <span class="diff-badge diff-positive">+5.6%</span>
+        </div>
+      </div>
+      <div class="opus-cell">
+        <div class="metric-name">ARC AGI 2</div>
+        <div class="metric-values">
+          <span>4.5: 37.6%</span>
+          <span style="font-weight:700;color:var(--accent-teal);">&rarr; 68.8%</span>
+          <span class="diff-badge diff-positive">+31.2%</span>
+        </div>
+      </div>
+      <div class="opus-cell">
+        <div class="metric-name">OpenRCA (диагностика)</div>
+        <div class="metric-values">
+          <span>4.5: 26.9%</span>
+          <span style="font-weight:700;color:var(--accent-teal);">&rarr; 34.9%</span>
+          <span class="diff-badge diff-positive">+8.0%</span>
+        </div>
+      </div>
+      <div class="opus-cell">
+        <div class="metric-name">MRCR v2 (1M)</div>
+        <div class="metric-values">
+          <span>4.5: 18.5%*</span>
+          <span style="font-weight:700;color:var(--accent-teal);">&rarr; 76.0%</span>
+          <span class="diff-badge diff-positive">+57.5%</span>
+        </div>
+      </div>
+      <div class="opus-cell">
+        <div class="metric-name">Контекст</div>
+        <div class="metric-values">
+          <span>4.5: 200K</span>
+          <span style="font-weight:700;color:var(--accent-teal);">&rarr; 1M &beta;</span>
+          <span class="diff-badge diff-positive">5x</span>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top:16px;font-size:13px;color:var(--text-mid);line-height:1.6;">
+      * Sonnet 4.5 для MRCR. Opus 4.6 &mdash; не лучше в написании кода, но значительно лучше как <strong style="color:var(--text-dark);">оператор среды разработки</strong>: навигация, отладка, контекст, Agent Teams.
+    </p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== 3. МАТРИЦА ===== -->
+<section>
+  <div class="section-label"><span class="num">03</span> Матрица</div>
+  <h2>Сравнительная матрица подписок</h2>
+
+  <div class="card fade-in" style="overflow-x:auto;">
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Инструмент</th>
+          <th>Мин. цена</th>
+          <th>Макс. цена</th>
+          <th>SWE-bench</th>
+          <th>Контекст</th>
+          <th>Свой CLI</th>
+          <th>В Claude Code</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tool-cell" style="color:#E85D4A;">&#x1F1FA;&#x1F1F8; Claude Code</td>
+          <td><span class="price-tag" style="background:#E85D4A;font-size:12px;">$20/мес</span></td>
+          <td><span class="price-tag" style="background:#E85D4A;font-size:12px;">$200/мес</span></td>
+          <td style="font-weight:700;color:var(--accent-teal);">80.8%</td>
+          <td>1M &beta;</td>
+          <td class="check">&#10003;</td>
+          <td>&mdash;</td>
+        </tr>
+        <tr>
+          <td class="tool-cell" style="color:#2D8E6E;">&#x1F1FA;&#x1F1F8; Gemini CLI</td>
+          <td><span class="price-tag free" style="font-size:12px;">БЕСПЛАТНО</span></td>
+          <td><span class="price-tag" style="background:#2D8E6E;font-size:12px;">$250/мес</span></td>
+          <td>76.2%</td>
+          <td>2M</td>
+          <td class="check">&#10003;</td>
+          <td class="cross">&#10007;</td>
+        </tr>
+        <tr>
+          <td class="tool-cell" style="color:#9B59B6;">&#x1F1FA;&#x1F1F8; ChatGPT Codex</td>
+          <td><span class="price-tag" style="background:#9B59B6;font-size:12px;">$20/мес</span></td>
+          <td><span class="price-tag" style="background:#9B59B6;font-size:12px;">$200/мес</span></td>
+          <td>75.4%</td>
+          <td>400K</td>
+          <td class="check">&#10003;</td>
+          <td class="cross">&#10007;</td>
+        </tr>
+        <tr>
+          <td class="tool-cell" style="color:#D4A017;">&#x1F1E8;&#x1F1F3; GLM Coding Plan</td>
+          <td><span class="price-tag" style="background:#D4A017;font-size:12px;">$6/мес</span></td>
+          <td><span class="price-tag" style="background:#D4A017;font-size:12px;">$40/мес</span></td>
+          <td>77.8%</td>
+          <td>200K</td>
+          <td class="cross">&#10007;</td>
+          <td class="check">&#10003;</td>
+        </tr>
+        <tr>
+          <td class="tool-cell" style="color:#C44569;">&#x1F1E8;&#x1F1F3; Alibaba Coding</td>
+          <td><span class="price-tag" style="background:#C44569;font-size:12px;">$10/мес</span></td>
+          <td><span class="price-tag" style="background:#C44569;font-size:12px;">$50/мес</span></td>
+          <td>70.6%</td>
+          <td>256K</td>
+          <td class="check">&#10003;</td>
+          <td class="check">&#10003;</td>
+        </tr>
+        <tr>
+          <td class="tool-cell" style="color:#8E44AD;">&#x1F1E8;&#x1F1F3; MiniMax Coding</td>
+          <td><span class="price-tag" style="background:#8E44AD;font-size:12px;">$10/мес</span></td>
+          <td><span class="price-tag" style="background:#8E44AD;font-size:12px;">$50/мес</span></td>
+          <td style="font-weight:700;color:var(--accent-teal);">80.2%</td>
+          <td>205K</td>
+          <td class="cross">&#10007;</td>
+          <td class="check">&#10003;</td>
+        </tr>
+        <tr>
+          <td class="tool-cell" style="color:#E67E22;">&#x1F1E8;&#x1F1F3; Kimi Membership</td>
+          <td><span class="price-tag free" style="font-size:12px;">БЕСПЛАТНО</span></td>
+          <td><span class="price-tag" style="background:#E67E22;font-size:12px;">$19/мес</span></td>
+          <td class="no-data">&mdash;</td>
+          <td>256K</td>
+          <td class="cross">&#10007;</td>
+          <td class="cross">&#10007;</td>
+        </tr>
+        <tr>
+          <td class="tool-cell" style="color:#1ABC9C;">&#x1F1FA;&#x1F1F8; GitHub Copilot</td>
+          <td><span class="price-tag" style="background:#1ABC9C;font-size:12px;">$10/мес</span></td>
+          <td><span class="price-tag" style="background:#1ABC9C;font-size:12px;">$39/мес</span></td>
+          <td class="no-data">&mdash;</td>
+          <td>Varies</td>
+          <td class="check">&#10003;</td>
+          <td class="cross">&#10007;</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Price vs Quality scatter -->
+  <div class="card fade-in" style="margin-top:16px;">
+    <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:6px;color:var(--accent-teal);">Цена vs Качество &mdash; где лучшее соотношение?</h3>
+    <p style="font-size:13px;color:var(--text-light);margin-bottom:20px;">Минимальная цена подписки &rarr; SWE-bench результат</p>
+
+    <div class="scatter-container">
+      <!-- Y axis -->
+      <span class="scatter-y-label" style="top:20px;">85%</span>
+      <span class="scatter-y-label" style="top:70px;">80%</span>
+      <span class="scatter-y-label" style="top:120px;">75%</span>
+      <span class="scatter-y-label" style="top:170px;">72%</span>
+      <span class="scatter-y-label" style="top:220px;">70%</span>
+      <span class="scatter-y-label" style="top:270px;">68%</span>
+
+      <!-- Grid lines -->
+      <div class="scatter-grid-line" style="top:20px;"></div>
+      <div class="scatter-grid-line" style="top:70px;"></div>
+      <div class="scatter-grid-line" style="top:120px;"></div>
+      <div class="scatter-grid-line" style="top:170px;"></div>
+      <div class="scatter-grid-line" style="top:220px;"></div>
+      <div class="scatter-grid-line" style="top:270px;"></div>
+
+      <!-- X axis -->
+      <span class="scatter-x-label" style="left:50px;">$0</span>
+      <span class="scatter-x-label" style="left:25%;">$6</span>
+      <span class="scatter-x-label" style="left:45%;">$10</span>
+      <span class="scatter-x-label" style="left:65%;">$20</span>
+      <span class="scatter-x-label" style="left:85%;">$50+</span>
+
+      <!-- Points: position mapping: Y: 85%=20px, 80%=70px, 75%=120px, 70%=220px; X mapped to % -->
+
+      <!-- Gemini: $0, 76.2% -->
+      <div class="scatter-point" style="left:50px;top:100px;">
+        <div class="scatter-dot" style="background:radial-gradient(circle,#2D8E6E,#2D8E6E88);"></div>
+        <div class="scatter-dot-label" style="color:#2D8E6E;">Gemini</div>
+      </div>
+
+      <!-- GLM: $6, 77.8% -->
+      <div class="scatter-point" style="left:25%;top:84px;">
+        <div class="scatter-dot" style="background:radial-gradient(circle,#D4A017,#D4A01788);"></div>
+        <div class="scatter-dot-label" style="color:#D4A017;">GLM</div>
+      </div>
+
+      <!-- MiniMax: $10, 80.2% -->
+      <div class="scatter-point" style="left:45%;top:68px;">
+        <div class="scatter-dot" style="background:radial-gradient(circle,#8E44AD,#8E44AD88);"></div>
+        <div class="scatter-dot-label" style="color:#8E44AD;">MiniMax</div>
+      </div>
+
+      <!-- Alibaba: $10, 70.6% -->
+      <div class="scatter-point" style="left:48%;top:224px;">
+        <div class="scatter-dot" style="background:radial-gradient(circle,#C44569,#C4456988);"></div>
+        <div class="scatter-dot-label" style="color:#C44569;">Alibaba</div>
+      </div>
+
+      <!-- Claude Code: $20, 80.8% -->
+      <div class="scatter-point" style="left:65%;top:62px;">
+        <div class="scatter-dot" style="background:radial-gradient(circle,#E85D4A,#E85D4A88);"></div>
+        <div class="scatter-dot-label" style="color:#E85D4A;">Claude</div>
+      </div>
+
+      <!-- ChatGPT: $20, 75.4% -->
+      <div class="scatter-point" style="left:68%;top:108px;">
+        <div class="scatter-dot" style="background:radial-gradient(circle,#9B59B6,#9B59B688);"></div>
+        <div class="scatter-dot-label" style="color:#9B59B6;">Codex</div>
+      </div>
+    </div>
+    <p class="scatter-hint">&uarr; Выше = лучше качество &middot; &larr; Левее = дешевле &middot; Идеальная зона: верхний левый угол</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== 4. ВЕРДИКТ ===== -->
+<section>
+  <div class="section-label"><span class="num">04</span> Вердикт</div>
+  <h2>Оптимальные стеки</h2>
+
+  <!-- Stack 1: Current -->
+  <div class="verdict-stack fade-in" style="border-left:4px solid #E85D4A;">
+    <div class="verdict-header">
+      <h3 style="color:#E85D4A;">Текущий стек Тима</h3>
+      <span class="verdict-price" style="color:#E85D4A;">$200/мес</span>
+    </div>
+    <p style="font-size:14px;line-height:1.6;color:var(--text-mid);">Claude Code Max 20x &rarr; Opus 4.6 полный доступ, 20x лимиты</p>
+    <p style="font-size:13px;color:var(--text-light);margin-top:8px;">SWE-bench 80.8% &middot; Terminal-Bench 65.4% &middot; 1M контекст &middot; Agent Teams</p>
+  </div>
+
+  <!-- Stack 2: Optimal -->
+  <div class="verdict-stack fade-in" style="border-left:4px solid var(--accent-teal);">
+    <div class="verdict-header">
+      <h3 style="color:var(--accent-teal);">Оптимальный стек &mdash; экономия 55%</h3>
+      <span class="verdict-price" style="color:var(--accent-teal);">$90/мес</span>
+    </div>
+    <div class="verdict-item">
+      <span class="v-tool" style="color:#8E44AD;">MiniMax Plus</span>
+      <span class="v-note">SWE 80.2% &mdash; почти Opus!</span>
+      <span class="price-tag" style="background:#8E44AD;font-size:12px;">$20/мес</span>
+    </div>
+    <div class="verdict-item">
+      <span class="v-tool" style="color:#E85D4A;">Claude Code Pro</span>
+      <span class="v-note">Sonnet 4.6 для сложного</span>
+      <span class="price-tag" style="background:#E85D4A;font-size:12px;">$20/мес</span>
+    </div>
+    <div class="verdict-item">
+      <span class="v-tool" style="color:#2D8E6E;">Gemini CLI Free</span>
+      <span class="v-note">1M контекст, рефакторинг</span>
+      <span class="price-tag free" style="font-size:12px;">БЕСПЛАТНО</span>
+    </div>
+    <div class="verdict-item">
+      <span class="v-tool" style="color:#D4A017;">GLM Coding Lite</span>
+      <span class="v-note">Рутинные задачи</span>
+      <span class="price-tag" style="background:#D4A017;font-size:12px;">$6/мес</span>
+    </div>
+    <div class="verdict-item">
+      <span class="v-tool" style="color:#C44569;">Alibaba Lite</span>
+      <span class="v-note">201 язык, 18K запр/мес</span>
+      <span class="price-tag" style="background:#C44569;font-size:12px;">$10/мес</span>
+    </div>
+    <div class="verdict-item">
+      <span class="v-tool" style="color:#1ABC9C;">GitHub Copilot Pro</span>
+      <span class="v-note">Автокомплит + мульти-модель</span>
+      <span class="price-tag" style="background:#1ABC9C;font-size:12px;">$10/мес</span>
+    </div>
+    <div class="verdict-total" style="color:var(--accent-teal);">Итого: $66/мес &rarr; Экономия $134/мес ($1,608/год)</div>
+  </div>
+
+  <!-- Stack 3: Ultra-budget -->
+  <div class="verdict-stack fade-in" style="border-left:4px solid var(--accent-gold);">
+    <div class="verdict-header">
+      <h3 style="color:var(--accent-gold);">Ультра-бюджет &mdash; экономия 90%</h3>
+      <span class="verdict-price" style="color:var(--accent-gold);">$16/мес</span>
+    </div>
+    <div class="verdict-item">
+      <span class="v-tool" style="color:#8E44AD;">MiniMax Starter</span>
+      <span class="v-note">SWE 80.2% &#8776; Opus уровень</span>
+      <span class="price-tag" style="background:#8E44AD;font-size:12px;">$10/мес</span>
+    </div>
+    <div class="verdict-item">
+      <span class="v-tool" style="color:#D4A017;">GLM Coding Lite</span>
+      <span class="v-note">GLM-5 SWE 77.8%</span>
+      <span class="price-tag" style="background:#D4A017;font-size:12px;">$6/мес</span>
+    </div>
+    <div class="verdict-item">
+      <span class="v-tool" style="color:#2D8E6E;">Gemini CLI Free</span>
+      <span class="v-note">Бесплатно, 1M контекст</span>
+      <span class="price-tag free" style="font-size:12px;">БЕСПЛАТНО</span>
+    </div>
+    <div class="verdict-total" style="color:var(--accent-gold);">Итого: $16/мес &rarr; Экономия $184/мес ($2,208/год) &middot; SWE-bench до 80.2%!</div>
+  </div>
+
+  <!-- Key answer -->
+  <div class="key-answer fade-in" style="margin-top:16px;">
+    <h3>Ответ на главный вопрос</h3>
+    <p>
+      <strong style="color:#D4A017;">Да, GLM от Z.ai</strong> &mdash; можно использовать за <strong>$6-40/мес</strong> вместо $200. GLM-5 набирает 77.8% SWE-bench (Opus 4.6 = 80.8%). Работает прямо внутри Claude Code.
+    </p>
+    <p>
+      <strong style="color:#2D8E6E;">Да, Gemini 3 Pro</strong> &mdash; <strong>бесплатно</strong> через Gemini CLI, 1000 запросов в день. Или $20/мес за AI Pro с повышенными лимитами.
+    </p>
+    <p>
+      <strong style="color:#8E44AD;">MiniMax M2.5</strong> &mdash; главная находка: <strong>$10-50/мес</strong>, а SWE-bench <strong>80.2%</strong> &mdash; разница с Opus 4.6 всего 0.6 процентных пункта!
+    </p>
+    <p>
+      <strong style="color:#C44569;">Alibaba Coding Plan</strong> &mdash; $10-50/мес, до 90K запросов. Qwen3.5-Plus + Qwen3-Coder. Работает в Claude Code и Qwen Code CLI.
+    </p>
+    <p>
+      <strong style="color:#E67E22;">Kimi K2.5</strong> &mdash; $19/мес, 256K контекст, Agent Swarm. Есть бесплатный тир.
+    </p>
+  </div>
+
+  <!-- Warning -->
+  <div class="warning-box fade-in" style="margin-top:16px;">
+    <div class="warn-title">О чём помнить</div>
+    <p>
+      <strong>SWE-bench &#8800; реальный опыт.</strong> Opus 4.6 остаётся лучшим по reasoning, Agent Teams, 1M контексту и диагностике. Дешёвые модели закрывают 70-80% задач, но для сложной архитектуры Opus незаменим.
+    </p>
+    <p>
+      <strong>Китайские сервисы</strong> &mdash; throttling в пиках, вопросы конфиденциальности данных, возможные ценовые повышения (GLM уже +30%).
+    </p>
+    <p>
+      <strong>Рекомендация:</strong> гибридный стек &mdash; Opus для 20-30% сложных задач, дешёвые модели для 70-80% рутины.
+    </p>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <p>Данные: Anthropic, Google, OpenAI, Z.ai, Alibaba Cloud, MiniMax, Moonshot AI, GitHub &middot; Февраль 2026</p>
+  <p style="margin-top:4px;opacity:.6;">SWE-bench Verified &mdash; независимый лидерборд (vals.ai) &middot; Все цены в USD</p>
+</footer>
+
+</div>
+
+<script>
+// Scroll-triggered fade-in animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
